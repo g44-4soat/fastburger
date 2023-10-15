@@ -1,5 +1,6 @@
-package br.com.fiap.challenge.adapters.out.repositories.entities;
+package br.com.fiap.challenge.adapters.out.repositories.entities.product;
 
+import br.com.fiap.challenge.adapters.out.repositories.entities.image.ProductImageEntity;
 import br.com.fiap.challenge.application.core.domain.enumerations.CategoryEnum;
 import jakarta.persistence.*;
 

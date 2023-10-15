@@ -1,5 +1,6 @@
-package br.com.fiap.challenge.application.core.domain.product;
+package br.com.fiap.challenge.adapters.out.repositories.entities.product;
 
+import br.com.fiap.challenge.application.core.domain.product.Product;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

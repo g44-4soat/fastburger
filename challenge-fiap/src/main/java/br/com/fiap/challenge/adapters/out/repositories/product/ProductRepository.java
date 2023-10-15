@@ -1,6 +1,6 @@
 package br.com.fiap.challenge.adapters.out.repositories.product;
 
-import br.com.fiap.challenge.adapters.out.repositories.entities.ProductEntity;
+import br.com.fiap.challenge.adapters.out.repositories.entities.product.ProductEntity;
 import br.com.fiap.challenge.application.core.domain.enumerations.CategoryEnum;
 import br.com.fiap.challenge.application.core.domain.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;

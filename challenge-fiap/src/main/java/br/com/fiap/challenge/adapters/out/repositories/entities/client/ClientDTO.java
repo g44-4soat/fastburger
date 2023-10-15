@@ -1,4 +1,4 @@
-package br.com.fiap.challenge.application.core.domain.client;
+package br.com.fiap.challenge.adapters.out.repositories.entities.client;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

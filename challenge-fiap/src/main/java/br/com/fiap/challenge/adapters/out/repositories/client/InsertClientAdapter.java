@@ -1,6 +1,6 @@
 package br.com.fiap.challenge.adapters.out.repositories.client;
 
-import br.com.fiap.challenge.adapters.out.repositories.entities.ClientEntity;
+import br.com.fiap.challenge.adapters.out.repositories.entities.client.ClientEntity;
 import br.com.fiap.challenge.application.core.domain.client.Client;
 import br.com.fiap.challenge.application.ports.out.client.InsertClientOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;

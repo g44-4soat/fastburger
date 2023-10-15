@@ -3,10 +3,9 @@ package br.com.fiap.challenge.services.client;
 import br.com.fiap.challenge.adapters.out.repositories.client.FindClientByCpfAdapter;
 import br.com.fiap.challenge.adapters.out.repositories.client.InsertClientAdapter;
 import br.com.fiap.challenge.application.core.domain.client.Client;
-import br.com.fiap.challenge.application.core.domain.client.ClientDTO;
-import br.com.fiap.challenge.application.core.domain.client.ClientMapper;
+import br.com.fiap.challenge.adapters.out.repositories.entities.client.ClientDTO;
+import br.com.fiap.challenge.adapters.out.repositories.entities.client.ClientMapper;
 import br.com.fiap.challenge.domain.exception.business.ClientNotFoundException;
-import br.com.fiap.challenge.adapters.out.repositories.client.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

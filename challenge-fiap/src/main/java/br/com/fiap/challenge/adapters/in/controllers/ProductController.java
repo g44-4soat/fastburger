@@ -1,6 +1,6 @@
 package br.com.fiap.challenge.adapters.in.controllers;
 
-import br.com.fiap.challenge.domain.enumerations.CategoryEnum;
+import br.com.fiap.challenge.application.core.domain.enumerations.CategoryEnum;
 import br.com.fiap.challenge.application.core.domain.product.Product;
 import br.com.fiap.challenge.services.product.ProductService;
 import io.swagger.v3.oas.annotations.Operation;

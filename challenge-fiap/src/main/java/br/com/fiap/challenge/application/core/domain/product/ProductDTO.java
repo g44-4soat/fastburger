@@ -1,6 +1,6 @@
 package br.com.fiap.challenge.application.core.domain.product;
 
-import br.com.fiap.challenge.domain.enumerations.CategoryEnum;
+import br.com.fiap.challenge.application.core.domain.enumerations.CategoryEnum;
 import br.com.fiap.challenge.application.core.domain.product.image.ProductImageDTO;
 import jakarta.validation.constraints.NotBlank;
 

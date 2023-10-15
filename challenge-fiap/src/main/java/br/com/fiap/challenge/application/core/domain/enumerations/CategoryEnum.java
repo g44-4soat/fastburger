@@ -1,4 +1,4 @@
-package br.com.fiap.challenge.domain.enumerations;
+package br.com.fiap.challenge.application.core.domain.enumerations;
 
 public enum CategoryEnum {
     BURGERS("BURGERS"),

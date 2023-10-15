@@ -1,4 +1,4 @@
-package br.com.fiap.challenge.application.core.domain.product.image;
+package br.com.fiap.challenge.adapters.out.repositories.entities.image;
 
 import jakarta.validation.constraints.NotBlank;
 

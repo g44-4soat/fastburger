@@ -1,6 +1,6 @@
 package br.com.fiap.challenge.adapters.out.repositories.client;
 
-import br.com.fiap.challenge.adapters.out.repositories.entities.ClientEntity;
+import br.com.fiap.challenge.adapters.out.repositories.entities.client.ClientEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

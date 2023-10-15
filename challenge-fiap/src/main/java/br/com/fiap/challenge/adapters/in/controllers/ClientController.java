@@ -1,6 +1,6 @@
 package br.com.fiap.challenge.adapters.in.controllers;
 
-import br.com.fiap.challenge.application.core.domain.client.ClientDTO;
+import br.com.fiap.challenge.adapters.out.repositories.entities.client.ClientDTO;
 import br.com.fiap.challenge.services.client.ClientService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

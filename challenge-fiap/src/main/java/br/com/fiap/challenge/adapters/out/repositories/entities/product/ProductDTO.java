@@ -1,7 +1,7 @@
-package br.com.fiap.challenge.application.core.domain.product;
+package br.com.fiap.challenge.adapters.out.repositories.entities.product;
 
+import br.com.fiap.challenge.adapters.out.repositories.entities.image.ProductImageDTO;
 import br.com.fiap.challenge.application.core.domain.enumerations.CategoryEnum;
-import br.com.fiap.challenge.application.core.domain.product.image.ProductImageDTO;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;

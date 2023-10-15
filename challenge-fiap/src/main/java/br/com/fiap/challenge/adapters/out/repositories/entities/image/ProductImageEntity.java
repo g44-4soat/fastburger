@@ -1,4 +1,4 @@
-package br.com.fiap.challenge.adapters.out.repositories.entities;
+package br.com.fiap.challenge.adapters.out.repositories.entities.image;
 
 import jakarta.persistence.*;
 

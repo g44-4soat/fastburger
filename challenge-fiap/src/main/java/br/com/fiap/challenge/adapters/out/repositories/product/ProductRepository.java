@@ -1,7 +1,7 @@
-package br.com.fiap.challenge.repositories.product;
+package br.com.fiap.challenge.adapters.out.repositories.product;
 
 import br.com.fiap.challenge.domain.enumerations.CategoryEnum;
-import br.com.fiap.challenge.domain.product.Product;
+import br.com.fiap.challenge.application.core.domain.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

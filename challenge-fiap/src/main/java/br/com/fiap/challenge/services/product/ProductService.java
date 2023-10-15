@@ -1,9 +1,9 @@
 package br.com.fiap.challenge.services.product;
 
 import br.com.fiap.challenge.domain.enumerations.CategoryEnum;
-import br.com.fiap.challenge.domain.product.Product;
-import br.com.fiap.challenge.repositories.product.ProductRepository;
-import jakarta.servlet.http.PushBuilder;
+import br.com.fiap.challenge.domain.exception.business.BusinessException;
+import br.com.fiap.challenge.application.core.domain.product.Product;
+import br.com.fiap.challenge.adapters.out.repositories.product.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +30,7 @@ public class ProductService {
 
     @Transactional
     public ResponseEntity<Product> updateProduct(Product product) {
+        if (product.getId() == null) throw new BusinessException("É necessario informar um produto.");
         Product oldProduct = this.productRepository.findById(product.getId()).get();
         if (oldProduct != null) return ResponseEntity.ok(this.productRepository.save(product));
         return ResponseEntity.notFound().build();

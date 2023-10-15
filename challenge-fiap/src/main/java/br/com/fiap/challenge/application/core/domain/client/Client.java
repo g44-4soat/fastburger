@@ -1,4 +1,4 @@
-package br.com.fiap.challenge.domain.client;
+package br.com.fiap.challenge.application.core.domain.client;
 
 import jakarta.persistence.*;
 import lombok.Data;

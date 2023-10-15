@@ -1,4 +1,4 @@
-package br.com.fiap.challenge.domain.client;
+package br.com.fiap.challenge.application.core.domain.client;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -10,18 +10,19 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Component
 public class ClientMapper {
+
     private ModelMapper modelMapper;
 
-    public ClientDTO toClienteDTO(Client cliente) {
-        return modelMapper.map(cliente, ClientDTO.class);
+    public ClientDTO toClienteDTO(Client client) {
+        return modelMapper.map(client, ClientDTO.class);
     }
 
-    public Client toEntity(ClientDTO clienteDTO) {
-        return modelMapper.map(clienteDTO, Client.class);
+    public Client toEntity(ClientDTO clientDTO) {
+        return modelMapper.map(clientDTO, Client.class);
     }
 
-    public List<ClientDTO> toCollectionClientes(List<Client> clientes) {
-        return clientes.stream()
+    public List<ClientDTO> toCollectionClientes(List<Client> clients) {
+        return clients.stream()
                 .map(this::toClienteDTO)
                 .collect(Collectors.toList());
     }

@@ -1,4 +1,4 @@
-package br.com.fiap.challenge.domain.client;
+package br.com.fiap.challenge.application.core.domain.client;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.hateoas.RepresentationModel;
 
 @Data
-public class ClientDTO extends RepresentationModel<ClientDTO> {
+public class ClientDTO {
 
     @NotBlank
     @CPF

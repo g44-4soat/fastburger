@@ -1,9 +1,21 @@
+version: "3"
 services:
-  postgres:
-    image: 'postgres:latest'
+  postgres-challenge:
+    image: postgres:16.0
     environment:
-      - 'POSTGRES_DB=fastburger'
-      - 'POSTGRES_PASSWORD=root'
-      - 'POSTGRES_USER=root'
+      POSTGRES_DB: challenge
+      POSTGRES_USER: "arch"
+      POSTGRES_PASSWORD: "challenge"
     ports:
-      - '5432'
+      - "5432:5432"
+    volumes:
+      - volume-db-challenge:/var/lib/postgresql/data
+    networks:
+      - netChallenge
+volumes:
+  volume-db-challenge:
+  valume-api-challenge:
+
+networks:
+  netChallenge:
+  netChallengeApi:

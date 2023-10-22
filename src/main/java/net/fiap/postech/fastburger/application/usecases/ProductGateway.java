@@ -1,10 +1,10 @@
-package net.fiap.postech.fastburger.application.ports.inputports;
+package net.fiap.postech.fastburger.application.usecases;
 
-import net.fiap.postech.fastburger.application.usecases.product.*;
+import net.fiap.postech.fastburger.application.ports.inputports.product.*;
 
 import java.util.List;
 
-public class ProductGateway implements SaveProductUseCase, UpdateProductUseCase, FindAllProductUseCase, DeleteProductUseCase, FindProductByCategoryUseCase, FindProductByIdUseCase {
+public class ProductGateway implements SaveProductGateway, UpdateProductGateway, FindAllProductGateway, DeleteProductGateway, FindProductByCategoryGateway, FindProductByIdGateway {
     @Override
     public Void delete(String id) {
         return null;

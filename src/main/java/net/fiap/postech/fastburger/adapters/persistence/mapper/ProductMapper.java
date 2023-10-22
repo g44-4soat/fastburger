@@ -34,4 +34,5 @@ public class ProductMapper {
     public ProductDTO domainToDTO(Product product) {
         return modelMapper.map(product, ProductDTO.class);
     }
+
 }

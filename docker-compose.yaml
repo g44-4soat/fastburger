@@ -12,10 +12,17 @@ services:
       - volume-db-challenge:/var/lib/postgresql/data
     networks:
       - netChallenge
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-challenge
+    networks:
+      - netChallenge
 volumes:
   volume-db-challenge:
   valume-api-challenge:
 
 networks:
   netChallenge:
-  netChallengeApi:

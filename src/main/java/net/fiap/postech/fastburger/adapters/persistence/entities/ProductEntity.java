@@ -19,8 +19,9 @@ public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long SKU;
     private String name;
+
     @Enumerated(EnumType.STRING)
     private CategoryEnum categoryEnum;
     private Double price;

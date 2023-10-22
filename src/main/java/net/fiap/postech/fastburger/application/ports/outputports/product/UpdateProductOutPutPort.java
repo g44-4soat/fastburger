@@ -1,5 +1,7 @@
 package net.fiap.postech.fastburger.application.ports.outputports.product;
 
+import net.fiap.postech.fastburger.application.domain.Product;
+
 public interface UpdateProductOutPutPort {
-    Object update(String id, Object product);
+    Product update(String id, Product product);
 }

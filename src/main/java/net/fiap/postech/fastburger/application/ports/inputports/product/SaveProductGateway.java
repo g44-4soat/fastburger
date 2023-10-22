@@ -1,5 +1,7 @@
 package net.fiap.postech.fastburger.application.ports.inputports.product;
 
+import net.fiap.postech.fastburger.application.domain.Product;
+
 public interface SaveProductGateway{
-    Object save(Object product);
+    Product save(Product product);
 }

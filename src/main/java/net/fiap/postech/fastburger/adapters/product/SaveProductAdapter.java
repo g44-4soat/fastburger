@@ -1,4 +1,4 @@
-package net.fiap.postech.fastburger.adapters;
+package net.fiap.postech.fastburger.adapters.product;
 
 import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.BusinessException;
 import net.fiap.postech.fastburger.adapters.persistence.mapper.ProductMapper;

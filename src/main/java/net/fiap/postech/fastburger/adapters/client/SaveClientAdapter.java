@@ -1,4 +1,4 @@
-package net.fiap.postech.fastburger.adapters;
+package net.fiap.postech.fastburger.adapters.client;
 
 import net.fiap.postech.fastburger.adapters.persistence.mapper.ClientMapper;
 import net.fiap.postech.fastburger.adapters.persistence.repositories.ClientRepository;

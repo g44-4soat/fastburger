@@ -16,7 +16,11 @@ public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String cpf;
     private String nome;
+
+    @Column(unique = true)
     private String email;
 }

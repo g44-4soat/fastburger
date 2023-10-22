@@ -1,5 +1,6 @@
 package net.fiap.postech.fastburger.adapters.configuration.exceptionHandler;
 
+import jakarta.validation.ConstraintViolationException;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -53,6 +54,26 @@ public class InterceptorHandlerException extends ResponseEntityExceptionHandler 
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<Object> handleNegocio(BusinessException ex, WebRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        HandlerBodyException handlerBodyException = new HandlerBodyException();
+        handlerBodyException.setStatus(status.value());
+        handlerBodyException.setDateTime(OffsetDateTime.now());
+        handlerBodyException.setTitle(ex.getMessage());
+        return handleExceptionInternal(ex, handlerBodyException, new HttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleNegocio(Exception ex, WebRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        HandlerBodyException handlerBodyException = new HandlerBodyException();
+        handlerBodyException.setStatus(status.value());
+        handlerBodyException.setDateTime(OffsetDateTime.now());
+        handlerBodyException.setTitle(ex.getMessage());
+        return handleExceptionInternal(ex, handlerBodyException, new HttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Object> handleVioletionException(Exception ex, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         HandlerBodyException handlerBodyException = new HandlerBodyException();
         handlerBodyException.setStatus(status.value());

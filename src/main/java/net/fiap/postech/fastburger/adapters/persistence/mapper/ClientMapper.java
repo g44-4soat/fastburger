@@ -4,17 +4,29 @@ import net.fiap.postech.fastburger.adapters.persistence.ClientDTO;
 import net.fiap.postech.fastburger.adapters.persistence.entities.ClientEntity;
 import net.fiap.postech.fastburger.application.domain.Client;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+@Component
 public class ClientMapper {
+
+    @Autowired
     private ModelMapper modelMapper;
 
     public ClientEntity toEntity(Client client) {
         return modelMapper.map(client, ClientEntity.class);
     }
 
-    public ClientEntity toEntity(ClientDTO clientDTO) {
+    public ClientDTO entityDomainToDTO(Client client) {
+        return modelMapper.map(client, ClientDTO.class);
+    }
+
+    public ClientEntity dtoToEntity(ClientDTO clientDTO) {
         return modelMapper.map(clientDTO, ClientEntity.class);
+    }
+
+    public Client dtoToEntityDomain(ClientDTO clientDTO) {
+        return modelMapper.map(clientDTO, Client.class);
     }
 
     public Client toDomain(ClientEntity clientEntity) {

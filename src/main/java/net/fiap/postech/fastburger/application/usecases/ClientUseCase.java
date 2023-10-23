@@ -17,13 +17,11 @@ public class ClientUseCase implements SaveClientGateway, FindClientByCpfGateway 
 
     @Override
     public Client find(String cpf) {
-        System.out.println("Passou no use case find");
         return this.findClientByCpfOutPutPort.find(cpf);
     }
 
     @Override
     public Client save(Client client) {
-        System.out.println("Passou no use case save");
         return this.saveClientOutPutPort.save(client);
     }
 }

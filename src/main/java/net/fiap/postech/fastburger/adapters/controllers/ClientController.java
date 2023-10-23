@@ -2,7 +2,7 @@ package net.fiap.postech.fastburger.adapters.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import net.fiap.postech.fastburger.adapters.persistence.ClientDTO;
+import net.fiap.postech.fastburger.adapters.persistence.dto.ClientDTO;
 import net.fiap.postech.fastburger.adapters.persistence.mapper.ClientMapper;
 import net.fiap.postech.fastburger.application.domain.Client;
 import net.fiap.postech.fastburger.application.ports.inputports.client.FindClientByCpfGateway;

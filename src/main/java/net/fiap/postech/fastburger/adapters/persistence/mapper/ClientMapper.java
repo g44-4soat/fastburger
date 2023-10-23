@@ -1,6 +1,6 @@
 package net.fiap.postech.fastburger.adapters.persistence.mapper;
 
-import net.fiap.postech.fastburger.adapters.persistence.ClientDTO;
+import net.fiap.postech.fastburger.adapters.persistence.dto.ClientDTO;
 import net.fiap.postech.fastburger.adapters.persistence.entities.ClientEntity;
 import net.fiap.postech.fastburger.application.domain.Client;
 import org.modelmapper.ModelMapper;

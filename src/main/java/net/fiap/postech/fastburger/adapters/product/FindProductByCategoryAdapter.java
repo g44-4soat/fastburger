@@ -1,6 +1,7 @@
 package net.fiap.postech.fastburger.adapters.product;
 
 import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.BusinessException;
+import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.ProductNotFoundException;
 import net.fiap.postech.fastburger.adapters.persistence.mapper.ProductMapper;
 import net.fiap.postech.fastburger.adapters.persistence.repositories.ProductRepository;
 import net.fiap.postech.fastburger.application.domain.Product;
@@ -29,7 +30,7 @@ public class FindProductByCategoryAdapter implements FindProductByCategoryGatewa
         List<Product> products = new ArrayList<>();
         productEntityList.forEach(productEntity -> products.add(this.productMapper.toDomain(productEntity)));
         if (products.isEmpty())
-            throw new BusinessException("Não foram encontrados produtos para esta categoria");
+            throw new ProductNotFoundException("Não foram encontrados produtos para esta categoria");
         return products;
     }
 }

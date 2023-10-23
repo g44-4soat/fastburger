@@ -1,10 +1,8 @@
 package net.fiap.postech.fastburger.adapters.persistence.mapper;
 
-import net.fiap.postech.fastburger.adapters.persistence.ProductDTO;
-import net.fiap.postech.fastburger.adapters.persistence.ProductResponseDTO;
-import net.fiap.postech.fastburger.adapters.persistence.entities.ClientEntity;
+import net.fiap.postech.fastburger.adapters.persistence.dto.ProductDTO;
+import net.fiap.postech.fastburger.adapters.persistence.dto.ProductResponseDTO;
 import net.fiap.postech.fastburger.adapters.persistence.entities.ProductEntity;
-import net.fiap.postech.fastburger.application.domain.Client;
 import net.fiap.postech.fastburger.application.domain.Product;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

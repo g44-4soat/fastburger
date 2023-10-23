@@ -1,4 +1,4 @@
-package net.fiap.postech.fastburger.adapters.persistence;
+package net.fiap.postech.fastburger.adapters.persistence.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

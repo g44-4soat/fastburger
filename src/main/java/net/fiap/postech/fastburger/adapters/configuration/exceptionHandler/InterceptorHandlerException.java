@@ -43,13 +43,20 @@ public class InterceptorHandlerException extends ResponseEntityExceptionHandler 
 
     @ExceptionHandler(ClientNotFoundException.class)
     public ResponseEntity<Object> handleEntidadeNaoEncontrada(ClientNotFoundException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.NOT_FOUND;
-
         HandlerBodyException handlerBodyException = new HandlerBodyException();
-        handlerBodyException.setStatus(status.value());
+        handlerBodyException.setStatus(HttpStatus.NOT_FOUND.value());
         handlerBodyException.setDateTime(OffsetDateTime.now());
         handlerBodyException.setTitle(ex.getMessage());
-        return handleExceptionInternal(ex, handlerBodyException, new HttpHeaders(), status, request);
+        return handleExceptionInternal(ex, handlerBodyException, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<Object> handleProductNaoEncontrada(ProductNotFoundException ex, WebRequest request) {
+        HandlerBodyException handlerBodyException = new HandlerBodyException();
+        handlerBodyException.setStatus(HttpStatus.NOT_FOUND.value());
+        handlerBodyException.setDateTime(OffsetDateTime.now());
+        handlerBodyException.setTitle(ex.getMessage());
+        return handleExceptionInternal(ex, handlerBodyException, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
     @ExceptionHandler(BusinessException.class)

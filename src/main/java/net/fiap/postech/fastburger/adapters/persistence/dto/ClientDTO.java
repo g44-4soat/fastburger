@@ -1,4 +1,4 @@
-package net.fiap.postech.fastburger.adapters.persistence;
+package net.fiap.postech.fastburger.adapters.persistence.dto;
 
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;

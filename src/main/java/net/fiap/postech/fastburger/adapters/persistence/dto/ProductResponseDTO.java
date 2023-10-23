@@ -1,4 +1,4 @@
-package net.fiap.postech.fastburger.adapters.persistence;
+package net.fiap.postech.fastburger.adapters.persistence.dto;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.fiap.postech.fastburger.application.domain.ProductImage;
 import net.fiap.postech.fastburger.application.domain.enums.CategoryEnum;
 
 import java.util.List;
@@ -18,7 +17,9 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDTO {
+public class ProductResponseDTO {
+
+    private Long sku;
 
     @NotBlank
     private String name;

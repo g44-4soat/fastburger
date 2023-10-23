@@ -1,6 +1,7 @@
 package net.fiap.postech.fastburger.adapters.product;
 
 import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.BusinessException;
+import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.ProductNotFoundException;
 import net.fiap.postech.fastburger.adapters.persistence.mapper.ProductMapper;
 import net.fiap.postech.fastburger.adapters.persistence.repositories.ProductRepository;
 import net.fiap.postech.fastburger.application.domain.Product;
@@ -29,7 +30,7 @@ public class UpdateProductAdapter implements UpdateProductGateway {
         var productEntityToSave = this.productMapper.domainToEntity(product);
 
         if (!productEntity.isPresent())
-            throw new BusinessException("Produto não encontrado.");
+            throw new ProductNotFoundException("Produto não encontrado.");
         productEntityToSave.setSKU(productEntity.get().getSKU());
         return this.productMapper.toDomain(this.productRepository.save(productEntityToSave));
     }

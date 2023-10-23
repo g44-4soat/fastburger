@@ -1,5 +1,7 @@
 package net.fiap.postech.fastburger.application.usecases;
 
+import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.BusinessException;
+import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.ProductNotFoundException;
 import net.fiap.postech.fastburger.application.domain.Product;
 import net.fiap.postech.fastburger.application.domain.enums.CategoryEnum;
 import net.fiap.postech.fastburger.application.ports.inputports.product.*;
@@ -19,7 +21,8 @@ public class ProductUseCase implements SaveProductGateway, UpdateProductGateway,
     private final DeleteProductOutPutPort deleteProduct;
     private final FindProductByCategoryOutPutPort findProductByCategory;
 
-    public ProductUseCase(SaveProductOutPutPort saveProduct, UpdateProductOutPutPort updateProduct, DeleteProductOutPutPort deleteProduct, FindProductByCategoryOutPutPort findProductByCategory) {
+    public ProductUseCase(SaveProductOutPutPort saveProduct, UpdateProductOutPutPort updateProduct, DeleteProductOutPutPort deleteProduct,
+                          FindProductByCategoryOutPutPort findProductByCategory) {
         this.saveProduct = saveProduct;
         this.updateProduct = updateProduct;
         this.deleteProduct = deleteProduct;
@@ -33,16 +36,27 @@ public class ProductUseCase implements SaveProductGateway, UpdateProductGateway,
 
     @Override
     public Product save(Product product) {
+        if (product.getPrice() <= 0) {
+            throw new BusinessException("O valor do produto não pode ser igual ou menor que zero!");
+        }
         return this.saveProduct.save(product);
     }
 
     @Override
     public Product update(String id, Product product) {
+        if (product.getPrice() <= 0) {
+            throw new BusinessException("O valor do produto não pode ser igual ou menor que zero!");
+        }
         return this.updateProduct.update(id, product);
     }
 
     @Override
     public List<Product> find(CategoryEnum categoryEnum) {
-        return this.findProductByCategory.find(categoryEnum);
+        List<Product> products = this.findProductByCategory.find(categoryEnum);
+        if (products.isEmpty())
+            throw new ProductNotFoundException("Produto não encontrado.");
+        if (products.isEmpty())
+            throw new ProductNotFoundException("Não foram encontrados produtos para esta categoria");
+        return products;
     }
 }

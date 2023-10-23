@@ -7,6 +7,7 @@ import net.fiap.postech.fastburger.adapters.persistence.repositories.ProductRepo
 import net.fiap.postech.fastburger.application.domain.Product;
 import net.fiap.postech.fastburger.application.domain.enums.CategoryEnum;
 import net.fiap.postech.fastburger.application.ports.inputports.product.FindProductByCategoryGateway;
+import net.fiap.postech.fastburger.application.ports.outputports.product.FindProductByCategoryOutPutPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class FindProductByCategoryAdapter implements FindProductByCategoryGateway {
+public class FindProductByCategoryAdapter implements FindProductByCategoryOutPutPort {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
@@ -29,8 +30,6 @@ public class FindProductByCategoryAdapter implements FindProductByCategoryGatewa
         var productEntityList = this.productRepository.findProductEntityByCategoryEnum(categoryEnum);
         List<Product> products = new ArrayList<>();
         productEntityList.forEach(productEntity -> products.add(this.productMapper.toDomain(productEntity)));
-        if (products.isEmpty())
-            throw new ProductNotFoundException("Não foram encontrados produtos para esta categoria");
         return products;
     }
 }

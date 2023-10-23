@@ -16,6 +16,7 @@ public class SaveOrderAdapter implements SaveOrderOutPutPort {
 
     @Override
     public Object save(Object order) {
-        return this.orderRepository.save(order);
+        // return this.orderRepository.save(order);
+        return null;
     }
 }

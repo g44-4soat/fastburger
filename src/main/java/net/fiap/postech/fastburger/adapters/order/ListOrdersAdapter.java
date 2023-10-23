@@ -18,6 +18,7 @@ public class ListOrdersAdapter implements ListOrdersOutPutPort {
 
     @Override
     public List<Object> list() {
-        return this.orderRepository.findAll();
+        // return this.orderRepository.findAll();
+        return null;
     }
 }

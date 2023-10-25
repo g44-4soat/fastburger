@@ -54,8 +54,6 @@ public class ProductUseCase implements SaveProductGateway, UpdateProductGateway,
     public List<Product> find(CategoryEnum categoryEnum) {
         List<Product> products = this.findProductByCategory.find(categoryEnum);
         if (products.isEmpty())
-            throw new ProductNotFoundException("Produto não encontrado.");
-        if (products.isEmpty())
             throw new ProductNotFoundException("Não foram encontrados produtos para esta categoria");
         return products;
     }

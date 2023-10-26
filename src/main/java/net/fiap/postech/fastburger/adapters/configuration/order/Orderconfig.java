@@ -11,7 +11,7 @@ public class Orderconfig {
     @Bean
     public OrderUseCase orderUseCase(
             DeleteOrderAdapter deleteOrderAdapter,
-            ListOrderByIdAdapter listOrderByIdAdapter,
+            ListOrderByNumberAdapter listOrderByIdAdapter,
             ListOrdersAdapter listOrdersAdapter,
             SaveOrderAdapter saveOrderAdapter,
             UpdateOrderAdapter updateOrderAdapter

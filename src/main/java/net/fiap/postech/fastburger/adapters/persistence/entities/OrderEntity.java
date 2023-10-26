@@ -33,7 +33,7 @@ public class OrderEntity {
     @ManyToOne
     private ClientEntity client;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "orders_product",
             joinColumns = {@JoinColumn(name = "order_id")},

@@ -13,4 +13,5 @@ import net.fiap.postech.fastburger.application.domain.enums.StatusOrder;
 public class HistoryOfOrder {
     private String id;
     private StatusOrder status;
+    private Long orderId;
 }

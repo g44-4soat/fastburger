@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.fiap.postech.fastburger.application.domain.enums.StatusOrder;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,8 +17,7 @@ public class Order {
     private String id;
     private String orderNumber;
     private LocalDateTime dateTimeCreation;
-    private LocalDateTime dateTimeUpdate;
     private Client client;
     private List<Product> products;
-    private List<HistoryOfOrder> status;
+    private StatusOrder status;
 }

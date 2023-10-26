@@ -2,24 +2,22 @@ package net.fiap.postech.fastburger.adapters.order;
 
 import net.fiap.postech.fastburger.adapters.persistence.repositories.OrderRepository;
 import net.fiap.postech.fastburger.application.domain.Order;
-import net.fiap.postech.fastburger.application.ports.outputports.order.ListOrdersOutPutPort;
+import net.fiap.postech.fastburger.application.ports.outputports.order.ListOrderByNumberOutPutPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
-public class ListOrdersAdapter implements ListOrdersOutPutPort {
+public class ListOrderByNumberAdapter implements ListOrderByNumberOutPutPort {
     private final OrderRepository orderRepository;
 
     @Autowired
-    public ListOrdersAdapter(OrderRepository orderRepository) {
+    public ListOrderByNumberAdapter(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 
     @Override
-    public List<Order> list() {
-        // return this.orderRepository.findAll();
+    public Order listById(String id) {
+        //  return this.orderRepository.findById(Long.parseLong(id)).get();
         return null;
     }
 }

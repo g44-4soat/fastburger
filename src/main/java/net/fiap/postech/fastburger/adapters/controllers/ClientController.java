@@ -3,6 +3,7 @@ package net.fiap.postech.fastburger.adapters.controllers;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import net.fiap.postech.fastburger.adapters.persistence.dto.ClientDTO;
+import net.fiap.postech.fastburger.adapters.persistence.dto.ClientResponseDTO;
 import net.fiap.postech.fastburger.adapters.persistence.mapper.ClientMapper;
 import net.fiap.postech.fastburger.application.domain.Client;
 import net.fiap.postech.fastburger.application.ports.inputports.client.FindClientByCpfGateway;
@@ -31,15 +32,15 @@ public class ClientController {
     }
 
     @GetMapping("/{cpf}")
-    public ResponseEntity<ClientDTO> findClientByCpf(@PathVariable("cpf") String cpf) {
+    public ResponseEntity<ClientResponseDTO> findClientByCpf(@PathVariable("cpf") String cpf) {
         var client = this.findClientByCpfGateway.find(cpf);
-        return ResponseEntity.ok(this.clientMapper.entityDomainToDTO(client));
+        return ResponseEntity.ok(this.clientMapper.entityDomainToResponseDTO(client));
     }
 
     @PostMapping
-    public ResponseEntity<ClientDTO> save(@RequestBody @Valid ClientDTO clientDTO) {
+    public ResponseEntity<ClientResponseDTO> save(@RequestBody @Valid ClientDTO clientDTO) {
         Client saved = this.saveClientGateway.save(clientMapper.dtoToEntityDomain(clientDTO));
-        return Optional.of(this.clientMapper.entityDomainToDTO(saved))
+        return Optional.of(this.clientMapper.entityDomainToResponseDTO(saved))
                 .map(client -> ResponseEntity.ok(client))
                 .orElse(ResponseEntity
                         .badRequest().build());

@@ -1,6 +1,7 @@
 package net.fiap.postech.fastburger.adapters.persistence.mapper;
 
 import net.fiap.postech.fastburger.adapters.persistence.dto.ClientDTO;
+import net.fiap.postech.fastburger.adapters.persistence.dto.ClientResponseDTO;
 import net.fiap.postech.fastburger.adapters.persistence.entities.ClientEntity;
 import net.fiap.postech.fastburger.application.domain.Client;
 import org.modelmapper.ModelMapper;
@@ -21,6 +22,10 @@ public class ClientMapper {
         return modelMapper.map(client, ClientDTO.class);
     }
 
+    public ClientResponseDTO entityDomainToResponseDTO(Client client) {
+        return modelMapper.map(client, ClientResponseDTO.class);
+    }
+
     public ClientEntity dtoToEntity(ClientDTO clientDTO) {
         return modelMapper.map(clientDTO, ClientEntity.class);
     }
@@ -35,5 +40,9 @@ public class ClientMapper {
 
     public ClientDTO toDTO(ClientEntity clientEntity) {
         return modelMapper.map(clientEntity, ClientDTO.class);
+    }
+
+    public ClientResponseDTO toResponseDTO(ClientEntity clientEntity) {
+        return modelMapper.map(clientEntity, ClientResponseDTO.class);
     }
 }

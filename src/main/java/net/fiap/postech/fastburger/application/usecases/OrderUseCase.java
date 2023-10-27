@@ -6,24 +6,22 @@ import net.fiap.postech.fastburger.application.ports.outputports.order.*;
 
 import java.util.List;
 
-public class OrderUseCase implements DeleteOrderGateway, ListOrderByNumberGateway, ListOrdersGateway, SaveOrderGateway, UpdateOrderGetway {
-
+public class OrderUseCase implements DeleteOrderGateway, ListOrderByNumberGateway, ListOrdersGateway, SaveOrderGateway, UpdateOrderGetway, ListOrderByIdGateway {
     private final DeleteOrderOutPutPort deleteOrderOutPutPort;
     private final ListOrderByNumberOutPutPort listOrderByNumberOutPutPort;
     private final ListOrdersOutPutPort listOrdersOutPutPort;
     private final SaveOrderOutPutPort saveOrderOutPutPort;
     private final UpdateOrderOutPutPort updateOrderOutPutPort;
 
-    public OrderUseCase(DeleteOrderOutPutPort deleteOrderOutPutPort,
-                        ListOrderByNumberOutPutPort listOrderByNumberOutPutPort,
-                        ListOrdersOutPutPort listOrdersOutPutPort,
-                        SaveOrderOutPutPort saveOrderOutPutPort,
-                        UpdateOrderOutPutPort updateOrderOutPutPort) {
+    private final ListOrderByIdOutPutPort listOrderByIdOutPutPort;
+
+    public OrderUseCase(DeleteOrderOutPutPort deleteOrderOutPutPort, ListOrderByNumberOutPutPort listOrderByNumberOutPutPort, ListOrdersOutPutPort listOrdersOutPutPort, SaveOrderOutPutPort saveOrderOutPutPort, UpdateOrderOutPutPort updateOrderOutPutPort, ListOrderByIdOutPutPort listOrderByIdOutPutPort) {
         this.deleteOrderOutPutPort = deleteOrderOutPutPort;
         this.listOrderByNumberOutPutPort = listOrderByNumberOutPutPort;
         this.listOrdersOutPutPort = listOrdersOutPutPort;
         this.saveOrderOutPutPort = saveOrderOutPutPort;
         this.updateOrderOutPutPort = updateOrderOutPutPort;
+        this.listOrderByIdOutPutPort = listOrderByIdOutPutPort;
     }
 
     @Override
@@ -32,8 +30,8 @@ public class OrderUseCase implements DeleteOrderGateway, ListOrderByNumberGatewa
     }
 
     @Override
-    public Order listById(String id) {
-        return this.listOrderByNumberOutPutPort.listById(id);
+    public Order listByNumber(String orderNumber) {
+        return this.listOrderByNumberOutPutPort.listByNumber(orderNumber);
     }
 
     @Override
@@ -49,5 +47,10 @@ public class OrderUseCase implements DeleteOrderGateway, ListOrderByNumberGatewa
     @Override
     public Order update(String id, Order order) {
         return this.updateOrderOutPutPort.update(id, order);
+    }
+
+    @Override
+    public Order listById(String id) {
+        return this.listOrderByIdOutPutPort.listById(id);
     }
 }

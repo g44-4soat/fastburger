@@ -19,7 +19,7 @@ public class UpdateOrderAdapter implements UpdateOrderOutPutPort {
 
     @Override
     public Order update(String id, Order order) {
-        var orderToUpdate = listOrderByIdAdapter.listById(id);
+        // var orderToUpdate = listOrderByIdAdapter.listById(id);
         // order.setIt(orderToUpdate.getId());
         //return this.orderRepository.save(order);
         return null;

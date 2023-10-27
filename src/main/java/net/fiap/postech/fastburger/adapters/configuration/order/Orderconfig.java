@@ -11,12 +11,13 @@ public class Orderconfig {
     @Bean
     public OrderUseCase orderUseCase(
             DeleteOrderAdapter deleteOrderAdapter,
-            ListOrderByNumberAdapter listOrderByIdAdapter,
+            ListOrderByNumberAdapter listOrderByNumberAdapter,
             ListOrdersAdapter listOrdersAdapter,
             SaveOrderAdapter saveOrderAdapter,
-            UpdateOrderAdapter updateOrderAdapter
+            UpdateOrderAdapter updateOrderAdapter,
+            ListOrderByIdAdapter listOrderByIdAdapter
     ) {
-        return new OrderUseCase(deleteOrderAdapter, listOrderByIdAdapter,
-                listOrdersAdapter, saveOrderAdapter, updateOrderAdapter);
+        return new OrderUseCase(deleteOrderAdapter, listOrderByNumberAdapter,
+                listOrdersAdapter, saveOrderAdapter, updateOrderAdapter, listOrderByIdAdapter);
     }
 }

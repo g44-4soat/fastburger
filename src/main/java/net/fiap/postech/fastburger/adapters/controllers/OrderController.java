@@ -2,6 +2,8 @@ package net.fiap.postech.fastburger.adapters.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import net.fiap.postech.fastburger.adapters.persistence.dto.OrderDTO;
+import net.fiap.postech.fastburger.adapters.persistence.dto.OrderItensDTO;
+import net.fiap.postech.fastburger.adapters.persistence.dto.ProductsOrderDTO;
 import net.fiap.postech.fastburger.adapters.persistence.entities.OrderEntity;
 import net.fiap.postech.fastburger.adapters.persistence.mapper.OrderMapper;
 import net.fiap.postech.fastburger.adapters.persistence.repositories.OrderRepository;
@@ -36,10 +38,21 @@ public class OrderController {
         this.orderMapper = orderMapper;
     }
 
-    @PostMapping
+    @GetMapping("orderNumber/{orderNumber}")
+    public ResponseEntity<Order> findOrderByNumber(@PathVariable("orderNumber") String orderNumber) {
+        return ResponseEntity.ok(this.listOrderByNumberGateway.listByNumber(orderNumber));
+    }
+
+    @PostMapping("/create")
     public ResponseEntity saveOrder(@RequestBody OrderDTO order) {
         Order saved = this.saveOrderGateway.save(this.orderMapper.orderDTOToOrder(order));
         return ResponseEntity.ok(saved);
+    }
+
+    @PutMapping("/lanche/order/{orderNumber}")
+    public ResponseEntity saveLancheOnOrder(@PathVariable("orderNumber") String orderNumber, @RequestBody ProductsOrderDTO productsOrderDTO) {
+        Order orderToUpdate = this.orderMapper.toUpdateOrder(this.findOrderByNumber(orderNumber).getBody(), productsOrderDTO);
+        return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, orderToUpdate));
     }
 /**
  @DeleteMapping("/{id}") public void deleteOrder(@PathVariable("id") Long id) {

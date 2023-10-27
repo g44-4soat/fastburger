@@ -69,6 +69,7 @@ public class InterceptorHandlerException extends ResponseEntityExceptionHandler 
         return handleExceptionInternal(ex, handlerBodyException, new HttpHeaders(), status, request);
     }
 
+    /***
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleNegocio(Exception ex, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
@@ -78,6 +79,7 @@ public class InterceptorHandlerException extends ResponseEntityExceptionHandler 
         handlerBodyException.setTitle(ex.getMessage());
         return handleExceptionInternal(ex, handlerBodyException, new HttpHeaders(), status, request);
     }
+     * **/
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handleVioletionException(Exception ex, WebRequest request) {

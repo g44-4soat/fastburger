@@ -25,13 +25,8 @@ public class UpdateOrderAdapter implements UpdateOrderOutPutPort {
 
     @Override
     public Order update(String orderNumber, Order order) {
-        AtomicReference<Double> valorTotal = new AtomicReference<>(0.0);
         var oldOrder = this.orderRepository.findOrderEntityByOrderNumber(orderNumber);
         order.setId(oldOrder.getId().toString());
-        order.getProducts().forEach(product -> {
-            valorTotal.updateAndGet(v -> v + product.getPrice().doubleValue());
-        });
-        order.setTotalValue(Double.parseDouble(valorTotal.get().toString()));
         OrderEntity saved = this.orderRepository.save(this.orderMapper.orderToOrderEntity(order));
         return this.orderMapper.orderEntityToOrder(saved);
     }

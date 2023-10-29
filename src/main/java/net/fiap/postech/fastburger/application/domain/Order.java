@@ -20,5 +20,6 @@ public class Order {
     private LocalDateTime dateTimeCreation;
     private Client client;
     private List<Product> products;
+    private Long quantityOfProducts;
     private StatusOrder status;
 }

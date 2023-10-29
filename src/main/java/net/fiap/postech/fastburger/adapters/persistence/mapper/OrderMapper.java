@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Component
 public class OrderMapper {
@@ -60,14 +61,18 @@ public class OrderMapper {
         return orderDTO;
     }
 
-    public Order toUpdateOrder(Order body, ProductsOrderDTO productsOrderDTO) {
+    public Order toUpdateOrder(Order body, List<ProductsOrderDTO> productsOrderDTO) {
+        AtomicReference<Double> valorTotal = new AtomicReference<>(0.0);
         List<Product> products = new ArrayList<>();
-        if (productsOrderDTO.getProductsId().isEmpty()) {
+        if (productsOrderDTO.isEmpty()) {
             throw new BusinessException("Sem produtos no pedido");
         }
-        productsOrderDTO.getProductsId().forEach(id -> {
-            products.add(this.productMapper.toDomain(this.productRepository.findById(id).get()));
+        productsOrderDTO.forEach(item -> {
+            Product domain = this.productMapper.toDomain(this.productRepository.findById(item.getProductId()).get());
+            products.add(domain);
         });
+
+        body.setTotalValue(Double.parseDouble(valorTotal.get().toString()));
         body.setProducts(products);
         return body;
     }

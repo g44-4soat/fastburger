@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/order")
 @Tag(name = "Order Controller Rest")
@@ -50,7 +52,7 @@ public class OrderController {
     }
 
     @PutMapping("/lanche/order/{orderNumber}")
-    public ResponseEntity saveLancheOnOrder(@PathVariable("orderNumber") String orderNumber, @RequestBody ProductsOrderDTO productsOrderDTO) {
+    public ResponseEntity saveLancheOnOrder(@PathVariable("orderNumber") String orderNumber, @RequestBody List<ProductsOrderDTO> productsOrderDTO) {
         Order orderToUpdate = this.orderMapper.toUpdateOrder(this.findOrderByNumber(orderNumber).getBody(), productsOrderDTO);
         return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, orderToUpdate));
     }

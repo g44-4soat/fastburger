@@ -1,5 +1,6 @@
 package net.fiap.postech.fastburger.adapters.order;
 
+import jakarta.transaction.Transactional;
 import net.fiap.postech.fastburger.adapters.persistence.entities.OrderEntity;
 import net.fiap.postech.fastburger.adapters.persistence.mapper.OrderMapper;
 import net.fiap.postech.fastburger.adapters.persistence.repositories.OrderRepository;
@@ -24,12 +25,11 @@ public class UpdateOrderAdapter implements UpdateOrderOutPutPort {
     }
 
     @Override
+    @Transactional
     public Order update(String orderNumber, Order order) {
-        var oldOrder = this.orderRepository.findOrderEntityByOrderNumber(orderNumber);
-
-        order.setId(oldOrder.getId().toString());
-
-        OrderEntity saved = this.orderRepository.save(this.orderMapper.orderToOrderEntity(order));
-        return this.orderMapper.orderEntityToOrder(saved);
+        OrderEntity orderEntity = this.orderMapper.orderToOrderEntity(order);
+        OrderEntity saved = this.orderRepository.save(orderEntity);
+        Order order1 = this.orderMapper.orderEntityToOrder(saved);
+        return order1;
     }
 }

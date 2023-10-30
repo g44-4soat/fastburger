@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -50,13 +51,7 @@ public class OrderMapper {
     }
 
     public Order orderDTOToOrder(OrderDTO order) {
-        Order orderParsed = new Order();
-        orderParsed.setStatus(order.getStatus());
-        if (order.getClientCPF() != null && !order.getClientCPF().isBlank() && !order.getClientCPF().isEmpty()) {
-            Client domain = this.clientMapper.toDomain(this.clientRepository.findClientEntityByCpf(order.getClientCPF()).orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado!")));
-            orderParsed.setClient(domain);
-        }
-        return orderParsed;
+        return modelMapper.map(order, Order.class);
     }
 
     public OrderDTO orderToOrderDTO(Order saved) {
@@ -98,18 +93,18 @@ public class OrderMapper {
             Product domain = this.productMapper.toDomain(this.productRepository.findById(item.getProductId()).get());
             products.add(domain);
         });
-
         return body;
     }
 
     public Order toUpdateOrderWithITens(Order body, List<OrderItemDTO> orderItensDTOS) {
-        var clientOrder = this.clientRepository.findById(body.getClient().getId());
-        List<ProductEntity> productEntities = new ArrayList<>();
-
-        orderItensDTOS.forEach(productId -> {
-            productEntities.add(this.productRepository.findById(productId.getProductId()).get());
+        List<OrderItem> orderItems = new ArrayList<>();
+        var clientOrder = this.clientRepository.findClientEntityByCpf(body.getClient().getCpf());
+        orderItensDTOS.forEach(product -> {
+            ProductEntity productEntity = this.productRepository.findById(product.getProductId()).get();
+            orderItems.add(new OrderItem(null, productEntity.getSKU(), product.getQuantity(), product.getUnitPrice(), product.getSubtotal()));
         });
-        return null;
+        body.setOrderItems(orderItems);
+        return body;
     }
 
     public Order orderRequestDTOToOrder(OrderRequestDTO order) {

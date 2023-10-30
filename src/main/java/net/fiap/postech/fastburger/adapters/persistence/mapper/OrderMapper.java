@@ -99,11 +99,19 @@ public class OrderMapper {
     public Order toUpdateOrderWithITens(Order body, List<OrderItemDTO> orderItensDTOS) {
         List<OrderItem> orderItems = new ArrayList<>();
         var clientOrder = this.clientRepository.findClientEntityByCpf(body.getClient().getCpf());
-        orderItensDTOS.forEach(product -> {
-            ProductEntity productEntity = this.productRepository.findById(product.getProductId()).get();
-            orderItems.add(new OrderItem(null, productEntity.getSKU(), product.getQuantity(), product.getUnitPrice(), product.getSubtotal()));
-        });
-        body.setOrderItems(orderItems);
+        if (body.getOrderItems().isEmpty()) {
+            orderItensDTOS.forEach(product -> {
+                ProductEntity productEntity = this.productRepository.findById(product.getProductId()).get();
+                orderItems.add(new OrderItem(null, productEntity.getSKU(), product.getQuantity(), product.getUnitPrice(), product.getSubtotal()));
+            });
+            body.setOrderItems(orderItems);
+
+        } else {
+            orderItensDTOS.forEach(product -> {
+                ProductEntity productEntity = this.productRepository.findById(product.getProductId()).get();
+                body.getOrderItems().add(new OrderItem(null, productEntity.getSKU(), product.getQuantity(), product.getUnitPrice(), product.getSubtotal()));
+            });
+        }
         return body;
     }
 

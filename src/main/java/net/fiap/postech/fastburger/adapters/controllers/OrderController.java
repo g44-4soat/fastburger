@@ -65,19 +65,22 @@ public class OrderController {
 
     @PutMapping("/lanche/order/{orderNumber}")
     public ResponseEntity saveLancheOnOrder(@PathVariable("orderNumber") String orderNumber, @RequestBody List<OrderItemDTO> orderItensDTOS) {
-        Order orderToUpdate = this.orderMapper.toUpdateOrderWithITens(this.orderMapper.orderDTOToOrder(this.findOrderByNumber(orderNumber).getBody()), orderItensDTOS);
+        Order order = this.orderMapper.orderDTOToOrder(this.findOrderByNumber(orderNumber).getBody());
+        Order orderToUpdate = this.orderMapper.toUpdateOrderWithITens(order, orderItensDTOS);
         return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, orderToUpdate));
     }
 
     @PutMapping("/acompanhamento/order/{orderNumber}")
     public ResponseEntity saveAcompanhamentoOnOrder(@PathVariable("orderNumber") String orderNumber, @RequestBody List<OrderItemDTO> orderItensDTOS) {
-        Order orderToUpdate = this.orderMapper.toUpdateOrderWithITens(this.orderMapper.orderDTOToOrder(this.findOrderByNumber(orderNumber).getBody()), orderItensDTOS);
+        Order order = this.listOrderByNumberGateway.listByNumber(orderNumber);
+        Order orderToUpdate = this.orderMapper.toUpdateOrderWithITens(order, orderItensDTOS);
         return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, orderToUpdate));
     }
 
     @PutMapping("/bebida/order/{orderNumber}")
     public ResponseEntity saveBebidaOnOrder(@PathVariable("orderNumber") String orderNumber, @RequestBody List<OrderItemDTO> orderItensDTOS) {
-        Order orderToUpdate = this.orderMapper.toUpdateOrderWithITens(this.orderMapper.orderDTOToOrder(this.findOrderByNumber(orderNumber).getBody()), orderItensDTOS);
+        Order order = this.orderMapper.orderDTOToOrder(this.findOrderByNumber(orderNumber).getBody());
+        Order orderToUpdate = this.orderMapper.toUpdateOrderWithITens(order, orderItensDTOS);
         return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, orderToUpdate));
     }
 

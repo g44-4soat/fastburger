@@ -36,7 +36,7 @@ public class OrderEntity {
             joinColumns = {@JoinColumn(name = "order_id")},
             inverseJoinColumns = {@JoinColumn(name = "itens_id")}
     )
-    private List<OrderItemEntity> orderItemList;
+    private List<OrderItemEntity> orderItems;
     @Enumerated(EnumType.STRING)
     private StatusOrder status;
 }

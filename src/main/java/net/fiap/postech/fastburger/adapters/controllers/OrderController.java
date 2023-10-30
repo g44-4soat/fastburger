@@ -2,11 +2,8 @@ package net.fiap.postech.fastburger.adapters.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import net.fiap.postech.fastburger.adapters.persistence.dto.OrderDTO;
-import net.fiap.postech.fastburger.adapters.persistence.dto.OrderItensDTO;
-import net.fiap.postech.fastburger.adapters.persistence.dto.ProductsOrderDTO;
-import net.fiap.postech.fastburger.adapters.persistence.entities.OrderEntity;
+import net.fiap.postech.fastburger.adapters.persistence.dto.OrderItemDTO;
 import net.fiap.postech.fastburger.adapters.persistence.mapper.OrderMapper;
-import net.fiap.postech.fastburger.adapters.persistence.repositories.OrderRepository;
 import net.fiap.postech.fastburger.application.domain.Order;
 import net.fiap.postech.fastburger.application.ports.inputports.order.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +38,9 @@ public class OrderController {
     }
 
     @GetMapping("orderNumber/{orderNumber}")
-    public ResponseEntity<Order> findOrderByNumber(@PathVariable("orderNumber") String orderNumber) {
-        return ResponseEntity.ok(this.listOrderByNumberGateway.listByNumber(orderNumber));
+    public ResponseEntity<OrderDTO> findOrderByNumber(@PathVariable("orderNumber") String orderNumber) {
+        Order order = this.listOrderByNumberGateway.listByNumber(orderNumber);
+        return ResponseEntity.ok(this.orderMapper.orderToOrderDTO(order));
     }
 
     @PostMapping("/create")
@@ -52,8 +50,8 @@ public class OrderController {
     }
 
     @PutMapping("/lanche/order/{orderNumber}")
-    public ResponseEntity saveLancheOnOrder(@PathVariable("orderNumber") String orderNumber, @RequestBody List<ProductsOrderDTO> productsOrderDTO) {
-        Order orderToUpdate = this.orderMapper.toUpdateOrder(this.findOrderByNumber(orderNumber).getBody(), productsOrderDTO);
+    public ResponseEntity saveLancheOnOrder(@PathVariable("orderNumber") String orderNumber, @RequestBody List<OrderItemDTO> orderItensDTOS) {
+        Order orderToUpdate = this.orderMapper.toUpdateOrderWithITens(this.orderMapper.orderDTOToOrder(this.findOrderByNumber(orderNumber).getBody()), orderItensDTOS);
         return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, orderToUpdate));
     }
 /**

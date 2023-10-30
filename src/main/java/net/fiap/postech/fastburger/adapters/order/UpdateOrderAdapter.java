@@ -26,7 +26,9 @@ public class UpdateOrderAdapter implements UpdateOrderOutPutPort {
     @Override
     public Order update(String orderNumber, Order order) {
         var oldOrder = this.orderRepository.findOrderEntityByOrderNumber(orderNumber);
+
         order.setId(oldOrder.getId().toString());
+
         OrderEntity saved = this.orderRepository.save(this.orderMapper.orderToOrderEntity(order));
         return this.orderMapper.orderEntityToOrder(saved);
     }

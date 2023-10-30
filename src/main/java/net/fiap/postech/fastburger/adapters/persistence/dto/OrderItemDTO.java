@@ -2,6 +2,8 @@ package net.fiap.postech.fastburger.adapters.persistence.dto;
 
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -10,4 +12,6 @@ import lombok.*;
 public class OrderItemDTO {
     private Long productId;
     private Integer quantity;
+    private BigDecimal unitPrice;
+    private BigDecimal subtotal;
 }

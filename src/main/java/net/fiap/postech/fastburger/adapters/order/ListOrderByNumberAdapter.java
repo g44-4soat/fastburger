@@ -1,5 +1,6 @@
 package net.fiap.postech.fastburger.adapters.order;
 
+import net.fiap.postech.fastburger.adapters.persistence.entities.OrderEntity;
 import net.fiap.postech.fastburger.adapters.persistence.mapper.OrderMapper;
 import net.fiap.postech.fastburger.adapters.persistence.repositories.OrderRepository;
 import net.fiap.postech.fastburger.application.domain.Order;
@@ -21,6 +22,7 @@ public class ListOrderByNumberAdapter implements ListOrderByNumberOutPutPort {
 
     @Override
     public Order listByNumber(String orderNumber) {
-        return this.orderMapper.orderEntityToOrder(this.orderRepository.findOrderEntityByOrderNumber(orderNumber));
+        OrderEntity orderEntityByOrderNumber = this.orderRepository.findOrderEntityByOrderNumber(orderNumber);
+        return this.orderMapper.orderEntityToOrder(orderEntityByOrderNumber);
     }
 }

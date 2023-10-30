@@ -26,6 +26,7 @@ public class SaveOrderAdapter implements SaveOrderOutPutPort {
     @Override
     public Order save(Order order) {
         var lastOrderId = this.orderRepository.getLastOrderId();
+
         if (lastOrderId == null || lastOrderId == 0) {
             order.setOrderNumber(generateOrderNumber().concat(BigDecimal.ONE.toString()));
         } else {

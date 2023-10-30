@@ -84,4 +84,16 @@ public class OrderController {
         return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, orderToUpdate));
     }
 
+    @PutMapping("/order/ready/{orderNumber}")
+    public ResponseEntity orderReady(@PathVariable("orderNumber") String orderNumber) {
+        Order order = this.listOrderByNumberGateway.listByNumber(orderNumber);
+        return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, this.orderMapper.mapOrderToReady(order)));
+    }
+
+    @PutMapping("/order/finished/{orderNumber}")
+    public ResponseEntity saveBebidaOnOrder(@PathVariable("orderNumber") String orderNumber) {
+        Order order = this.listOrderByNumberGateway.listByNumber(orderNumber);
+        return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, this.orderMapper.mapOrderToFinished(order)));
+    }
+
 }

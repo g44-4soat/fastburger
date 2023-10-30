@@ -136,4 +136,14 @@ public class OrderMapper {
         }
         return orderParsed;
     }
+
+    public Order mapOrderToReady(Order order) {
+        order.setStatus(StatusOrder.READY);
+        return order;
+    }
+
+    public Order mapOrderToFinished(Order order) {
+        order.setStatus(StatusOrder.FINISHED);
+        return order;
+    }
 }

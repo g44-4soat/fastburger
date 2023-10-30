@@ -1,0 +1,10 @@
+INSERT INTO clients (cpf, nome, email) VALUES ('123.456.789-01', 'João Silva', 'joao.silva@example.com');
+INSERT INTO clients (cpf, nome, email) VALUES ('987.654.321-09', 'Maria Souza', 'maria.souza@example.com');
+INSERT INTO clients (cpf, nome, email) VALUES ('111.222.333-44', 'Carlos Santos', 'carlos.santos@example.com');
+INSERT INTO clients (cpf, nome, email) VALUES ('555.666.777-88', 'Ana Pereira', 'ana.pereira@example.com');
+INSERT INTO clients (cpf, nome, email) VALUES ('999.888.777-66', 'Pedro Oliveira', 'pedro.oliveira@example.com');
+INSERT INTO clients (cpf, nome, email) VALUES ('222.333.444-55', 'Isabela Ferreira', 'isabela.ferreira@example.com');
+INSERT INTO clients (cpf, nome, email) VALUES ('444.555.666-77', 'Lucas Martins', 'lucas.martins@example.com');
+INSERT INTO clients (cpf, nome, email) VALUES ('777.888.999-00', 'Eduarda Alves', 'eduarda.alves@example.com');
+INSERT INTO clients (cpf, nome, email) VALUES ('888.777.666-55', 'Felipe Costa', 'felipe.costa@example.com');
+INSERT INTO clients (cpf, nome, email) VALUES ('333.222.111-44', 'Sofia Rodrigues', 'sofia.rodrigues@example.com');

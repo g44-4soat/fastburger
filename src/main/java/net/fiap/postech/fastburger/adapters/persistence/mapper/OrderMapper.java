@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -98,7 +97,11 @@ public class OrderMapper {
 
     public Order toUpdateOrderWithITens(Order body, List<OrderItemDTO> orderItensDTOS) {
         List<OrderItem> orderItems = new ArrayList<>();
-        var clientOrder = this.clientRepository.findClientEntityByCpf(body.getClient().getCpf());
+
+        if (body.getClient() != null) {
+            var clientOrder = this.clientRepository.findClientEntityByCpf(body.getClient().getCpf());
+        }
+
         if (body.getOrderItems().isEmpty()) {
             orderItensDTOS.forEach(product -> {
                 ProductEntity productEntity = this.productRepository.findById(product.getProductId()).get();
@@ -112,6 +115,15 @@ public class OrderMapper {
                 body.getOrderItems().add(new OrderItem(null, productEntity.getSKU(), product.getQuantity(), product.getUnitPrice(), product.getSubtotal()));
             });
         }
+        AtomicReference<Double> valorTotal = new AtomicReference<>(0.0);
+        body.getOrderItems().forEach(orderItem -> {
+            orderItem.setSubtotal(BigDecimal.valueOf(orderItem.getQuantity().intValue() * orderItem.getUnitPrice().doubleValue()));
+        });
+
+        body.getOrderItems().forEach(orderItem -> {
+            valorTotal.updateAndGet(v -> v + orderItem.getSubtotal().doubleValue());
+        });
+        body.setTotalValue(BigDecimal.valueOf(valorTotal.get()));
         return body;
     }
 

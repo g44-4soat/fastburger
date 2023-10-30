@@ -3,6 +3,7 @@ package net.fiap.postech.fastburger.adapters.controllers;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import net.fiap.postech.fastburger.adapters.persistence.dto.OrderDTO;
 import net.fiap.postech.fastburger.adapters.persistence.dto.OrderItemDTO;
+import net.fiap.postech.fastburger.adapters.persistence.dto.OrderRequestDTO;
 import net.fiap.postech.fastburger.adapters.persistence.mapper.OrderMapper;
 import net.fiap.postech.fastburger.application.domain.Order;
 import net.fiap.postech.fastburger.application.ports.inputports.order.*;
@@ -44,8 +45,8 @@ public class OrderController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity saveOrder(@RequestBody OrderDTO order) {
-        Order saved = this.saveOrderGateway.save(this.orderMapper.orderDTOToOrder(order));
+    public ResponseEntity saveOrder(@RequestBody OrderRequestDTO order) {
+        Order saved = this.saveOrderGateway.save(this.orderMapper.orderRequestDTOToOrder(order));
         return ResponseEntity.ok(saved);
     }
 

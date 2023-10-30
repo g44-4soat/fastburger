@@ -4,6 +4,7 @@ import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.Busin
 import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.ClientNotFoundException;
 import net.fiap.postech.fastburger.adapters.persistence.dto.OrderDTO;
 import net.fiap.postech.fastburger.adapters.persistence.dto.OrderItemDTO;
+import net.fiap.postech.fastburger.adapters.persistence.dto.OrderRequestDTO;
 import net.fiap.postech.fastburger.adapters.persistence.dto.ProductsOrderDTO;
 import net.fiap.postech.fastburger.adapters.persistence.entities.OrderEntity;
 import net.fiap.postech.fastburger.adapters.persistence.entities.ProductEntity;
@@ -13,6 +14,7 @@ import net.fiap.postech.fastburger.application.domain.Client;
 import net.fiap.postech.fastburger.application.domain.Order;
 import net.fiap.postech.fastburger.application.domain.OrderItem;
 import net.fiap.postech.fastburger.application.domain.Product;
+import net.fiap.postech.fastburger.application.domain.enums.StatusOrder;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -107,5 +109,15 @@ public class OrderMapper {
             productEntities.add(this.productRepository.findById(productId.getProductId()).get());
         });
         return null;
+    }
+
+    public Order orderRequestDTOToOrder(OrderRequestDTO order) {
+        Order orderParsed = new Order();
+        orderParsed.setStatus(StatusOrder.RECEIVED);
+        if (order.getClientCPF() != null && !order.getClientCPF().isBlank() && !order.getClientCPF().isEmpty()) {
+            Client domain = this.clientMapper.toDomain(this.clientRepository.findClientEntityByCpf(order.getClientCPF()).orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado!")));
+            orderParsed.setClient(domain);
+        }
+        return orderParsed;
     }
 }

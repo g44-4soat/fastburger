@@ -1,4 +1,4 @@
-# Para executar a aplicação 
+# Para executar a aplicação
 
 ### Utilizando o docker-compose
  * Execute o comando: "docker compose up --build -d"
@@ -8,9 +8,11 @@
 
 ### Variáveis de ambiente
 * No arquivo docker-compose.yaml você encontrará as seguintes variáveis que podend ser alteradas conforme sua necessidade:
-  SPRING_DATASOURCE_URL: "url do banco de dados"
-  SPRING_DATASOURCE_USERNAME: "usuário do banco de dados"
-  SPRING_DATASOURCE_PASSWORD: "senha do banco de dados"
-  SPRING_PORT: "porta da aplicação"
+ - SPRING_DATASOURCE_URL: "url do banco de dados"
+ - SPRING_DATASOURCE_USERNAME: "usuário do banco de dados"
+ - SPRING_DATASOURCE_PASSWORD: "senha do banco de dados"
+ - SPRING_PORT: "porta da aplicação"
 
 
+### Swagger:
+* http://localhost:8080/swagger-ui/index.html

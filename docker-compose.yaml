@@ -1,7 +1,22 @@
-version: "3"
+version: "3.2"
 services:
-  postgres-challenge:
-    image: postgres:16.0
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/challenge"
+      SPRING_DATASOURCE_USERNAME: "arch"
+      SPRING_DATASOURCE_PASSWORD: "challenge"
+      SPRING_PORT: "8080"
+    networks:
+      - netChallenge
+    restart: always
+
+  postgres:
+    image: postgres:latest
     environment:
       POSTGRES_DB: challenge
       POSTGRES_USER: "arch"
@@ -12,17 +27,10 @@ services:
       - volume-db-challenge:/var/lib/postgresql/data
     networks:
       - netChallenge
-  app:
-    build: .
-    ports:
-      - "8080:8080"
-    depends_on:
-      - postgres-challenge
-    networks:
-      - netChallenge
 volumes:
   volume-db-challenge:
   valume-api-challenge:
 
 networks:
   netChallenge:
+    driver: bridge

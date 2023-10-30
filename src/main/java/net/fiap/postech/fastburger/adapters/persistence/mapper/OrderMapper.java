@@ -72,8 +72,6 @@ public class OrderMapper {
             products.add(domain);
         });
 
-        body.setTotalValue(Double.parseDouble(valorTotal.get().toString()));
-        body.setProducts(products);
         return body;
     }
 }

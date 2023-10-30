@@ -25,23 +25,18 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String orderNumber;
-
     private Double totalValue;
-
     @UpdateTimestamp
     private LocalDateTime dateTimeCreation;
-
     @ManyToOne
     private ClientEntity client;
-
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "orders_product",
+            name = "order_itens",
             joinColumns = {@JoinColumn(name = "order_id")},
-            inverseJoinColumns = {@JoinColumn(name = "product_id")}
+            inverseJoinColumns = {@JoinColumn(name = "itens_id")}
     )
-    private List<ProductEntity> products;
-
+    private List<OrderItemEntity> orderItemList;
     @Enumerated(EnumType.STRING)
     private StatusOrder status;
 }

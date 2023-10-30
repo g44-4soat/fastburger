@@ -55,12 +55,17 @@ public class OrderController {
         Order orderToUpdate = this.orderMapper.toUpdateOrderWithITens(this.orderMapper.orderDTOToOrder(this.findOrderByNumber(orderNumber).getBody()), orderItensDTOS);
         return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, orderToUpdate));
     }
-/**
- @DeleteMapping("/{id}") public void deleteOrder(@PathVariable("id") Long id) {
- this.orderRepository.delete(this.orderRepository.getReferenceById(id));
- }
 
- @GetMapping public ResponseEntity findAllOrders() {
- return ResponseEntity.ok(this.orderRepository.findAll());
- } **/
+    @PutMapping("/acompanhamento/order/{orderNumber}")
+    public ResponseEntity saveAcompanhamentoOnOrder(@PathVariable("orderNumber") String orderNumber, @RequestBody List<OrderItemDTO> orderItensDTOS) {
+        Order orderToUpdate = this.orderMapper.toUpdateOrderWithITens(this.orderMapper.orderDTOToOrder(this.findOrderByNumber(orderNumber).getBody()), orderItensDTOS);
+        return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, orderToUpdate));
+    }
+
+    @PutMapping("/bebida/order/{orderNumber}")
+    public ResponseEntity saveBebidaOnOrder(@PathVariable("orderNumber") String orderNumber, @RequestBody List<OrderItemDTO> orderItensDTOS) {
+        Order orderToUpdate = this.orderMapper.toUpdateOrderWithITens(this.orderMapper.orderDTOToOrder(this.findOrderByNumber(orderNumber).getBody()), orderItensDTOS);
+        return ResponseEntity.ok(this.updateOrderGetway.update(orderNumber, orderToUpdate));
+    }
+
 }

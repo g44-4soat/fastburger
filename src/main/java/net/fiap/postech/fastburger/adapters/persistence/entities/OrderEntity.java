@@ -26,6 +26,7 @@ public class OrderEntity {
     private Long id;
     private String orderNumber;
     private Double totalValue;
+    private Boolean wasPaid = false;
     @UpdateTimestamp
     private LocalDateTime dateTimeCreation;
     @ManyToOne

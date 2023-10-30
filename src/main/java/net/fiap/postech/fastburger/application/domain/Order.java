@@ -18,6 +18,7 @@ public class Order {
     private String id;
     private String orderNumber;
     private BigDecimal totalValue;
+    private Boolean wasPaid = false;
     private LocalDateTime dateTimeCreation;
     private Client client;
     private List<OrderItem> orderItems;

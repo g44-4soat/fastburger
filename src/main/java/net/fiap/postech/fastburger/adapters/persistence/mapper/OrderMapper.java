@@ -64,7 +64,8 @@ public class OrderMapper {
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setStatus(saved.getStatus());
         orderDTO.setOrderNumber(saved.getOrderNumber());
-
+        orderDTO.setWasPaid(saved.getWasPaid());
+        
         if (saved.getOrderItems() != null) {
             orderDTO.setOrderItens(orderItemToOrderItemDTO(saved.getOrderItems()));
             orderDTO.getOrderItens().forEach(orderItemDTO -> {

@@ -27,3 +27,6 @@ gerenciando seus pedidos e estoques de forma adequada. Sem ele, expandir a lanch
 resultando em clientes insatisfeitos e impactando os negócios de forma negativa. Para solucionar o problema, a lanchonete irá investir em um sistema de autoatendimento de fast food, 
 que é composto por uma série de dispositivos e interfaces que permitem aos clientes selecionar e fazer pedidos sem precisar interagir com um atendente.
 <p/>
+
+### 📚  [Como executar a aplicação](HELP.md)
+

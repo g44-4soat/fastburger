@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String orderNumber;
-    private Double totalValue;
+    private Double totalValue = BigDecimal.ZERO.doubleValue();
     private Boolean wasPaid = false;
     @UpdateTimestamp
     private LocalDateTime dateTimeCreation;

@@ -68,7 +68,8 @@ public class OrderMapper {
 
         if (saved.getOrderItems() != null) {
             orderDTO.setOrderItens(orderItemToOrderItemDTO(saved.getOrderItems()));
-            orderDTO.setTotalValue(BigDecimal.valueOf(saved.getTotalValue().doubleValue()));
+            if (saved.getTotalValue() != null)
+                orderDTO.setTotalValue(BigDecimal.valueOf(saved.getTotalValue().doubleValue()));
         }
 
         if (saved.getClient() != null)

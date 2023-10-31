@@ -1,12 +1,10 @@
-FROM openjdk:17-jdk-slim
-
+FROM openjdk:17-jdk-slim AS app-challenge
 WORKDIR /app
+COPY . /app
 
-COPY target/fastburger-0.0.1-SNAPSHOT.jar /app/fastburger-0.0.1-SNAPSHOT.jar
+RUN type=cache, target=/root/.m2 ./mvnw clean install -Dmaven.test.skip=true
 
-# Exponha a porta em que a aplicação Spring está em execução (substitua a porta padrão se necessário)
 EXPOSE 8080
+CMD ["java", "-jar", "/app/target/fastburger-0.0.1-SNAPSHOT.jar", "--spring.config.name=docker"]
 
-# Comando para iniciar a aplicação quando o contêiner for iniciado
-CMD ["java", "-jar", "fastburger-0.0.1-SNAPSHOT.jar"]
 

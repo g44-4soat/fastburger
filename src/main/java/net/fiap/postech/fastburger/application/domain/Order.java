@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.fiap.postech.fastburger.application.domain.enums.StatusOrder;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,9 +17,10 @@ import java.util.List;
 public class Order {
     private String id;
     private String orderNumber;
-    private Double totalValue;
+    private BigDecimal totalValue;
+    private Boolean wasPaid = false;
     private LocalDateTime dateTimeCreation;
     private Client client;
-    private List<Product> products;
+    private List<OrderItem> orderItems;
     private StatusOrder status;
 }

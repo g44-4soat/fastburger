@@ -15,9 +15,10 @@ public class Orderconfig {
             ListOrdersAdapter listOrdersAdapter,
             SaveOrderAdapter saveOrderAdapter,
             UpdateOrderAdapter updateOrderAdapter,
-            ListOrderByIdAdapter listOrderByIdAdapter
+            ListOrderByIdAdapter listOrderByIdAdapter,
+            ListOrderByStatusAdapter listOrderByStatusAdapter
     ) {
         return new OrderUseCase(deleteOrderAdapter, listOrderByNumberAdapter,
-                listOrdersAdapter, saveOrderAdapter, updateOrderAdapter, listOrderByIdAdapter);
+                listOrdersAdapter, saveOrderAdapter, updateOrderAdapter, listOrderByIdAdapter, listOrderByStatusAdapter);
     }
 }

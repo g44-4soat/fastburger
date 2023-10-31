@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.fiap.postech.fastburger.application.domain.enums.StatusOrder;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -13,6 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDTO {
+    private String orderNumber;
     private StatusOrder status;
-    private Long clientId;
+    private String clientCPF;
+    private BigDecimal totalValue;
+    private Boolean wasPaid = false;
+    private List<OrderItemDTO> orderItens;
 }

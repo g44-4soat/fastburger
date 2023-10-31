@@ -12,5 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductsOrderDTO {
-    private List<Long> productsId;
+    private Long productId;
+    private Long quantityOfProducts;
 }

@@ -15,6 +15,4 @@ public class OrderItem {
     private String id;
     private Long productId;
     private Integer quantity;
-    private BigDecimal unitPrice;
-    private BigDecimal subtotal;
 }

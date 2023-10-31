@@ -20,6 +20,4 @@ public class OrderItemEntity {
     private Long id;
     private Long productId;
     private Integer quantity;
-    private BigDecimal unitPrice;
-    private BigDecimal subtotal;
 }

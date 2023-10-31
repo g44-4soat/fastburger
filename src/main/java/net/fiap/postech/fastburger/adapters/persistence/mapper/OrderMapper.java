@@ -9,6 +9,7 @@ import net.fiap.postech.fastburger.adapters.persistence.dto.ProductsOrderDTO;
 import net.fiap.postech.fastburger.adapters.persistence.entities.OrderEntity;
 import net.fiap.postech.fastburger.adapters.persistence.entities.ProductEntity;
 import net.fiap.postech.fastburger.adapters.persistence.repositories.ClientRepository;
+import net.fiap.postech.fastburger.adapters.persistence.repositories.OrderRepository;
 import net.fiap.postech.fastburger.adapters.persistence.repositories.ProductRepository;
 import net.fiap.postech.fastburger.application.domain.Client;
 import net.fiap.postech.fastburger.application.domain.Order;
@@ -21,7 +22,9 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Component
@@ -34,6 +37,9 @@ public class OrderMapper {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Autowired
     private ProductMapper productMapper;
@@ -62,10 +68,7 @@ public class OrderMapper {
 
         if (saved.getOrderItems() != null) {
             orderDTO.setOrderItens(orderItemToOrderItemDTO(saved.getOrderItems()));
-            orderDTO.getOrderItens().forEach(orderItemDTO -> {
-                totalValueOrder.updateAndGet(v -> v + orderItemDTO.getSubtotal().doubleValue());
-            });
-            orderDTO.setTotalValue(BigDecimal.valueOf(totalValueOrder.get()));
+            orderDTO.setTotalValue(BigDecimal.valueOf(saved.getTotalValue().doubleValue()));
         }
 
         if (saved.getClient() != null)
@@ -77,7 +80,7 @@ public class OrderMapper {
     public List<OrderItemDTO> orderItemToOrderItemDTO(List<OrderItem> itens) {
         List<OrderItemDTO> orderItemDTOSToReturn = new ArrayList<>();
         itens.forEach(orderItem -> {
-            orderItemDTOSToReturn.add(new OrderItemDTO(orderItem.getProductId(), orderItem.getQuantity(), orderItem.getUnitPrice(), orderItem.getSubtotal()));
+            orderItemDTOSToReturn.add(new OrderItemDTO(orderItem.getProductId(), orderItem.getQuantity()));
         });
         return orderItemDTOSToReturn;
     }
@@ -96,6 +99,8 @@ public class OrderMapper {
     }
 
     public Order toUpdateOrderWithITens(Order body, List<OrderItemDTO> orderItensDTOS) {
+        OrderEntity orderEntity = this.orderRepository.findOrderEntityByOrderNumber(body.getOrderNumber());
+        AtomicReference<Double> valorTotal = new AtomicReference<>(0.0);
         List<OrderItem> orderItems = new ArrayList<>();
 
         if (body.getClient() != null) {
@@ -105,24 +110,21 @@ public class OrderMapper {
         if (body.getOrderItems().isEmpty()) {
             orderItensDTOS.forEach(product -> {
                 ProductEntity productEntity = this.productRepository.findById(product.getProductId()).get();
-                orderItems.add(new OrderItem(null, productEntity.getSKU(), product.getQuantity(), product.getUnitPrice(), product.getSubtotal()));
+                orderItems.add(new OrderItem(null, productEntity.getSKU(), product.getQuantity()));
             });
             body.setOrderItems(orderItems);
 
         } else {
             orderItensDTOS.forEach(product -> {
                 ProductEntity productEntity = this.productRepository.findById(product.getProductId()).get();
-                body.getOrderItems().add(new OrderItem(null, productEntity.getSKU(), product.getQuantity(), product.getUnitPrice(), product.getSubtotal()));
+                body.getOrderItems().add(new OrderItem(null, productEntity.getSKU(), product.getQuantity()));
             });
         }
-        AtomicReference<Double> valorTotal = new AtomicReference<>(0.0);
-        body.getOrderItems().forEach(orderItem -> {
-            orderItem.setSubtotal(BigDecimal.valueOf(orderItem.getQuantity().intValue() * orderItem.getUnitPrice().doubleValue()));
-        });
 
-        body.getOrderItems().forEach(orderItem -> {
-            valorTotal.updateAndGet(v -> v + orderItem.getSubtotal().doubleValue());
+        orderItensDTOS.forEach(orderItem -> {
+            valorTotal.updateAndGet(x -> x + (orderItem.getQuantity() * this.productRepository.findById(orderItem.getProductId()).get().getPrice()));
         });
+        valorTotal.updateAndGet(x -> x + orderEntity.getTotalValue());
         body.setTotalValue(BigDecimal.valueOf(valorTotal.get()));
         return body;
     }

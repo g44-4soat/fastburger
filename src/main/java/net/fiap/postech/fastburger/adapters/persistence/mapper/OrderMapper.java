@@ -122,9 +122,14 @@ public class OrderMapper {
         }
 
         orderItensDTOS.forEach(orderItem -> {
-            valorTotal.updateAndGet(x -> x + (orderItem.getQuantity() * this.productRepository.findById(orderItem.getProductId()).get().getPrice()));
+            Double price = this.productRepository.findById(orderItem.getProductId()).get().getPrice();
+            Integer quantity = orderItem.getQuantity();
+            valorTotal.updateAndGet(x -> x + (quantity * price));
         });
-        valorTotal.updateAndGet(x -> x + orderEntity.getTotalValue());
+
+        if (orderEntity.getTotalValue() != null) {
+            valorTotal.updateAndGet(x -> x + orderEntity.getTotalValue());
+        }
         body.setTotalValue(BigDecimal.valueOf(valorTotal.get()));
         return body;
     }

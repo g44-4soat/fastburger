@@ -1,2 +1,0 @@
-ALTER TABLE public.order_itens ADD CONSTRAINT fk28cxwle5s6csry2pacj7464jw FOREIGN KEY (order_id) REFERENCES public.orders(id);
-ALTER TABLE public.order_itens ADD CONSTRAINT fkn1embe7an90r9b4f1gm6akmbg FOREIGN KEY (itens_id) REFERENCES public.itens(id);

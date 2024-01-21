@@ -43,8 +43,8 @@ public class MercadoPagoCheckout implements CheckoutContract {
                     .build();
         } else if (PayMentMethodEnum.CARD.name().equals(paymentMethodDTO.getMethod().getType())) {
             paymentDataDTO = PaymentDataDTO.builder()
-                    .ticketUrl("was paid with cash")
-                    .QRCode("was paid with cash")
+                    .ticketUrl("was paid with card")
+                    .QRCode("was paid with card")
                     .method(paymentMethodDTO.getMethod().name())
                     .build();
         } else {

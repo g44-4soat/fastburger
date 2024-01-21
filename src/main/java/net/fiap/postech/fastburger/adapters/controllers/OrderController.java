@@ -43,6 +43,14 @@ public class OrderController {
         this.listOrderByStatusGateway = listOrderByStatusGateway;
     }
 
+    @GetMapping
+    public ResponseEntity<List<OrderDTO>> findOrders() {
+        List<Order> orders = this.listOrdersGateway.list();
+        List<OrderDTO> orderDTOS = new ArrayList<>();
+        orders.forEach(order -> orderDTOS.add(this.orderMapper.orderToOrderDTO(order)));
+        return ResponseEntity.ok(orderDTOS);
+    }
+
     @GetMapping("orderNumber/{orderNumber}")
     public ResponseEntity<OrderDTO> findOrderByNumber(@PathVariable("orderNumber") String orderNumber) {
         Order order = this.listOrderByNumberGateway.listByNumber(orderNumber);

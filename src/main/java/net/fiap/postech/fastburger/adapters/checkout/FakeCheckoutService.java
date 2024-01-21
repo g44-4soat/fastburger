@@ -1,6 +1,8 @@
 package net.fiap.postech.fastburger.adapters.checkout;
 
 import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.BusinessException;
+import net.fiap.postech.fastburger.adapters.feignClients.dto.PaymentDataProcess;
+import net.fiap.postech.fastburger.adapters.feignClients.dto.PaymentStatus;
 import net.fiap.postech.fastburger.adapters.persistence.dto.PaymentDataDTO;
 import net.fiap.postech.fastburger.adapters.persistence.dto.PaymentMethodDTO;
 import net.fiap.postech.fastburger.application.domain.Order;
@@ -47,6 +49,16 @@ public class FakeCheckoutService implements CheckoutContract{
                 .method(paymentMethod.getMethod().getType())
                 .QRCode(generateQRCode(orderNumber.concat(paymentMethod.getMethod().getType())))
                 .build();
+    }
+
+    @Override
+    public PaymentStatus paymentStatys(String orderNumber) {
+        return null;
+    }
+
+    @Override
+    public void processFallbackPayment(PaymentDataProcess paymentDataProcess, String token) {
+
     }
 
     public String generateQRCode(String content) {

@@ -1,7 +1,11 @@
 package net.fiap.postech.fastburger.adapters.checkout;
 
+import net.fiap.postech.fastburger.adapters.configuration.authentication.AuthenticationService;
+import net.fiap.postech.fastburger.adapters.configuration.exceptionHandler.BusinessException;
 import net.fiap.postech.fastburger.adapters.feignClients.MercadoPagoService;
 import net.fiap.postech.fastburger.adapters.feignClients.dto.PaymentDTO;
+import net.fiap.postech.fastburger.adapters.feignClients.dto.PaymentDataProcess;
+import net.fiap.postech.fastburger.adapters.feignClients.dto.PaymentStatus;
 import net.fiap.postech.fastburger.adapters.persistence.dto.PaymentDataDTO;
 import net.fiap.postech.fastburger.adapters.persistence.dto.PaymentMethodDTO;
 import net.fiap.postech.fastburger.adapters.persistence.dto.enumerations.PayMentMethodEnum;
@@ -20,13 +24,15 @@ import java.util.Date;
 public class MercadoPagoCheckout implements CheckoutContract {
     private final MercadoPagoService mercadoPagoService;
 
+    private final AuthenticationService authenticationService;
     private final OrderMapper orderMapper;
     private final UpdateOrderGetway updateOrderGetway;
     private final ListOrderByNumberGateway listOrderByNumberGateway;
 
     @Autowired
-    public MercadoPagoCheckout(MercadoPagoService mercadoPagoService, OrderMapper orderMapper, UpdateOrderGetway updateOrderGetway, ListOrderByNumberGateway listOrderByNumberGateway) {
+    public MercadoPagoCheckout(MercadoPagoService mercadoPagoService, AuthenticationService authenticationService, OrderMapper orderMapper, UpdateOrderGetway updateOrderGetway, ListOrderByNumberGateway listOrderByNumberGateway) {
         this.mercadoPagoService = mercadoPagoService;
+        this.authenticationService = authenticationService;
         this.orderMapper = orderMapper;
         this.updateOrderGetway = updateOrderGetway;
         this.listOrderByNumberGateway = listOrderByNumberGateway;
@@ -34,6 +40,24 @@ public class MercadoPagoCheckout implements CheckoutContract {
 
     public PaymentDataDTO payOrder(String orderNumber, PaymentMethodDTO paymentMethodDTO) {
         return getPaymentDataDTO(orderNumber, paymentMethodDTO);
+    }
+
+    @Override
+    public PaymentStatus paymentStatys(String orderNumber) {
+        return PaymentStatus.builder()
+                .orderId(orderNumber)
+                .paymentWasApproved(this.listOrderByNumberGateway.listByNumber(orderNumber).getWasPaid())
+                .build();
+    }
+
+    @Override
+    public void processFallbackPayment(PaymentDataProcess paymentDataProcess, String token) {
+        if (!this.authenticationService.verifyToken(token)){
+            throw new BusinessException("Invalid Token");
+        }
+        Order order = this.listOrderByNumberGateway.listByNumber(paymentDataProcess.getOrderId());
+        order.setWasPaid(paymentDataProcess.isPaymentWasApproved());
+        Order update = this.updateOrderGetway.update(paymentDataProcess.getOrderId(), order);
     }
 
     private PaymentDataDTO getPaymentDataDTO(String orderNumber, PaymentMethodDTO paymentMethodDTO) {

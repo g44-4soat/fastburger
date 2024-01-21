@@ -1,6 +1,7 @@
 package net.fiap.postech.fastburger.adapters.feignClients;
 
 import net.fiap.postech.fastburger.adapters.feignClients.dto.PaymentDTO;
+import net.fiap.postech.fastburger.adapters.feignClients.dto.PaymentRequestDTO;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ public interface MercadoPagoFeignClient {
     ResponseEntity<PaymentDTO> generateQRCode(
             @RequestHeader(value = "Authorization", required = true) String authorizationHeader,
             @RequestHeader(value = "X-Idempotency-Key", required = true) String CodeKey,
-            @RequestBody Object body);
+            @RequestBody PaymentRequestDTO body);
 
     @RequestMapping(method = RequestMethod.GET, value = "/v1/payment_methods")
     @Cacheable("placementUseCase")

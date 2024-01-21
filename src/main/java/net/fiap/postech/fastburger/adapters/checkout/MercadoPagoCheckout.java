@@ -13,6 +13,9 @@ import net.fiap.postech.fastburger.application.ports.inputports.order.UpdateOrde
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Date;
+
 @Service
 public class MercadoPagoCheckout implements CheckoutContract {
     private final MercadoPagoService mercadoPagoService;
@@ -38,12 +41,19 @@ public class MercadoPagoCheckout implements CheckoutContract {
         if (PayMentMethodEnum.CASH.name().equals(paymentMethodDTO.getMethod().getType())) {
             paymentDataDTO = PaymentDataDTO.builder()
                     .ticketUrl("was paid with cash")
+                    .method("card")
                     .QRCode("was paid with cash")
+                    .createDate(Date.from(Instant.now()))
+                    .operationType("regular_payment")
+                    .checkoutId(orderNumber.concat(paymentMethodDTO.getMethod().getType().length() + "/G44"))
                     .method(paymentMethodDTO.getMethod().name())
                     .build();
         } else if (PayMentMethodEnum.CARD.name().equals(paymentMethodDTO.getMethod().getType())) {
             paymentDataDTO = PaymentDataDTO.builder()
+                    .method("cash")
                     .ticketUrl("was paid with card")
+                    .createDate(Date.from(Instant.now()))
+                    .operationType("regular_payment")
                     .QRCode("was paid with card")
                     .method(paymentMethodDTO.getMethod().name())
                     .build();
@@ -65,7 +75,13 @@ public class MercadoPagoCheckout implements CheckoutContract {
             throw new RuntimeException(e);
         }
         return PaymentDataDTO.builder()
-                .method(paymentMethodDTO.getMethod().getType())
+                .method(paymentDTO.getPaymentMethodId() + " /MERCADO_PAGO")
+                .checkoutId(paymentDTO.getId().toString())
+                .createDate(paymentDTO.getDateCreated())
+                .lastUpdateDate(paymentDTO.getDateLastUpdated())
+                .moneyReleaseStatus(paymentDTO.getMoneyReleaseStatus())
+                .expirationDate(paymentDTO.getDateOfExpiration())
+                .operationType(paymentDTO.getOperationType())
                 .QRCode(paymentDTO.getPointOfInteractionDTO().getTransactionDataDTO().getQrCode())
                 .ticketUrl(paymentDTO.getPointOfInteractionDTO().getTransactionDataDTO().getTicketUrl())
                 .build();

@@ -10,4 +10,4 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 EXPOSE 8080
-CMD ["java", "-jar", "/app/target/fastburger-0.0.1-SNAPSHOT.jar", "--spring.config.name=docker"]
+CMD ["java", "-jar", "/app/target/fastburger-0.0.2-SNAPSHOT.jar", "--spring.config.name=docker"]

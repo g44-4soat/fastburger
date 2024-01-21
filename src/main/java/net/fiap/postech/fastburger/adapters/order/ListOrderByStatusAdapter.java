@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ListOrderByStatusAdapter implements ListOrderByStatusOutPutPort {
@@ -27,10 +29,10 @@ public class ListOrderByStatusAdapter implements ListOrderByStatusOutPutPort {
     @Override
     public List<Order> listByStatus(StatusOrder statusOrder) {
         List<OrderEntity> orderEntityByStatus = this.orderRepository.findOrderEntityByStatus(statusOrder);
-        List<Order> orders = new ArrayList<>();
-        orderEntityByStatus.forEach(orderEntity -> {
-            orders.add(this.orderMapper.orderEntityToOrder(orderEntity));
-        });
+        List<Order> orders = orderEntityByStatus.stream()
+                .map(this.orderMapper::orderEntityToOrder)
+                .sorted(Comparator.comparing(Order::getDateTimeCreation))
+                .collect(Collectors.toList());
         return orders;
     }
 }

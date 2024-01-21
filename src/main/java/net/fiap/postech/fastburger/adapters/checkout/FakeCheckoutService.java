@@ -22,7 +22,7 @@ import java.util.Base64;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 
 @Component
-public class FakeCheckoutService {
+public class FakeCheckoutService implements CheckoutContract{
     private final UpdateOrderGetway updateOrderGetway;
     private final ListOrderByNumberGateway listOrderByNumberGateway;
 

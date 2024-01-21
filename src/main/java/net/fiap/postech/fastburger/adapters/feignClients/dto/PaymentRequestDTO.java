@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class PaymentRequestDTO {
     private double transaction_amount;
+    private String description;
     private String payment_method_id;
     private PayerDTO payer;
 

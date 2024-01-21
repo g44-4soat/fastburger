@@ -8,4 +8,5 @@ import lombok.Data;
 public class PaymentDataDTO {
     private String method;
     private String QRCode;
+    private String ticketUrl;
 }

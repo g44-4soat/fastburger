@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: fastburger-api
+  labels:
+    fastburger.service: postgres
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      fastburger.service: postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      namespace: fastburger-api
+      labels:
+        fastburger.network/netchallenge: "true"
+        fastburger.service: postgres
+    spec:
+      containers:
+        - image: postgres:latest
+          name: postgres
+          envFrom:
+            - configMapRef:
+                name: fastburger-api-configmap
+            - secretRef:
+                name: fastburger-api-secrets
+          ports:
+            - containerPort: 5432
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: volume-db-challenge
+      volumes:
+      - name: volume-db-challenge
+        persistentVolumeClaim:
+          claimName: volume-db-challenge

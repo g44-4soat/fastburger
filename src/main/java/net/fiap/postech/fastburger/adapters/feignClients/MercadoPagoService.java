@@ -7,7 +7,6 @@ import net.fiap.postech.fastburger.adapters.persistence.dto.OrderDTO;
 import net.fiap.postech.fastburger.adapters.persistence.dto.PaymentMethodDTO;
 import net.fiap.postech.fastburger.application.domain.Client;
 import net.fiap.postech.fastburger.application.ports.inputports.client.FindClientByCpfGateway;
-import net.fiap.postech.fastburger.application.ports.inputports.product.FindProductByCategoryGateway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,12 +14,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class MercadoPagoService {
 
-    @Value("${mercado-pago.token}")
+    @Value("${MERCADO_TOKEN}")
     private String bearerToken;
     private final FindClientByCpfGateway findClientByCpfGateway;
     private final MercadoPagoFeignClient mercadoPagoFeignClient;
 
-    public MercadoPagoService(FindProductByCategoryGateway findProductByCategoryGateway, FindClientByCpfGateway findClientByCpfGateway, MercadoPagoFeignClient mercadoPagoFeignClient) {
+    public MercadoPagoService(FindClientByCpfGateway findClientByCpfGateway, MercadoPagoFeignClient mercadoPagoFeignClient) {
         this.findClientByCpfGateway = findClientByCpfGateway;
         this.mercadoPagoFeignClient = mercadoPagoFeignClient;
     }

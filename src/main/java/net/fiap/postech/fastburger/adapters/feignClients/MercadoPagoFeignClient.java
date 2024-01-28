@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "mercado-api", url = "${mercado-pago.api}")
+@FeignClient(name = "mercado-api", url = "#{paymentApiConfig.getMercadoApi()}")
 public interface MercadoPagoFeignClient {
 
     @PostMapping("/v1/payments")

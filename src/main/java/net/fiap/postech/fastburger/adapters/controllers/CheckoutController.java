@@ -36,8 +36,8 @@ public class CheckoutController {
     }
 
     @PostMapping("/payment/fallback/{orderNumber}")
-    public ResponseEntity<Void> fallbackPayment(@RequestBody PaymentDataProcess paymentDataProcess, @RequestHeader("Authentication") String token){
-        this.mercadoPagoCheckout.processFallbackPayment(paymentDataProcess, token);
+    public ResponseEntity<Void> fallbackPayment(@RequestBody PaymentDataProcess paymentDataProcess){
+        this.mercadoPagoCheckout.processFallbackPayment(paymentDataProcess, null);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

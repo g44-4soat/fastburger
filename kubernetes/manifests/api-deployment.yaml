@@ -18,7 +18,7 @@ spec:
         fastburger.service: api
     spec:
       containers:
-        - image: 4soatg44/challenge-fastburger:1.0.1
+        - image: 4soatg44/challenge-fastburger:1.2.1
           name: api
           envFrom:
             - configMapRef:

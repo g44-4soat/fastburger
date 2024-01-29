@@ -23,3 +23,6 @@
 
 ### Swagger:
 * http://localhost:8080/swagger-ui/index.html
+
+## Link video Youtube:
+* https://www.youtube.com/watch?v=cpTS392dOiA

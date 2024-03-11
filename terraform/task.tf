@@ -5,13 +5,11 @@ resource "aws_ecs_task_definition" "task" {
       name      = "${var.projectName}"
       essential = true,
       image     = "${aws_ecr_repository.repository.repository_url}:latest",
-      #command   = ["-Dsonar.search.javaAdditionalOpts=-Dnode.store.allow_mmap=false"]
       command   = ["java", "-jar", "/app/target/fastburger-0.2.1-SNAPSHOT.jar", "--spring.config.name=docker"]
       environment = [
         {
           name = "SPRING_DATASOURCE_URL"
-          #value = "jdbc:postgresql://${data.aws_db_instance.database.endpoint}/${aws_db_instance.rds.db_name}"
-          value = "jdbc:postgresql://${aws_db_instance.rds.identifier}/${aws_db_instance.rds.db_name}"
+          value = "jdbc:postgresql://${aws_db_instance.rds.endpoint}/${aws_db_instance.rds.db_name}"
         },
         {
           name  = "SPRING_DATASOURCE_USERNAME"
@@ -23,19 +21,19 @@ resource "aws_ecs_task_definition" "task" {
         },
         {
           name  = "SPRING_PORT"
-          value = "8080"
+          value = "${var.spring_port}"
         },
         {
           name  = "MERCADO_TOKEN"
-          value = "Bearer TEST-8984958385382549-010720-8b45e680cd085f9976863a95655daff7-143716477"
+          value = "${var.mercado_token}"
         },
         {
           name  = "TOKEN_FALLBACK"
-          value = "ODk4NDk1ODM4NTM4MjU0OS0wMTA3MjAtOGI0NWU2ODBjZDA4NWY5OTc2ODYzYTk1NjU1ZGFmZjctMTQzNzE2NDc3"
+          value = "${var.token_fallback}"
         },
         {
           name  = "MERCADO_API"
-          value = "https://api.mercadopago.com"
+          value = "${var.mercado_api}"
         }
       ]
       logConfiguration = {

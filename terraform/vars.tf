@@ -7,7 +7,7 @@ variable "clusterName" {
 }
 
 variable "regionDefault" {
-  default = "us-east-1" # example: us-east-1
+  default = "us-east-1"
 }
 
 variable "engineRds" {
@@ -23,11 +23,11 @@ variable "rdsDbName" {
 }
 
 variable "rdsUser" {
-  default = "arch"
+  description = "Inserir usuario do banco em secrets"
 }
 
 variable "rdsPass" {
-  default = "challenge"
+  description = "Inserir senha do banco em secrets"
 }
 
 variable "instanceClass" {
@@ -46,29 +46,44 @@ variable "maxStorage" {
   default = "30"
 }
 
+variable "spring_port" {
+  default = "8080"
+}
+
+variable "mercado_token" {
+  description = "Inserir token do mercado pago"
+}
+
+variable "token_fallback" {
+  default = "ODk4NDk1ODM4NTM4MjU0OS0wMTA3MjAtOGI0NWU2ODBjZDA4NWY5OTc2ODYzYTk1NjU1ZGFmZjctMTQzNzE2NDc3"
+}
+
+variable "mercado_api" {
+  default = "https://api.mercadopago.com"
+}
+
 variable "subnet01" {
-  default = "subnet-03e972fa6d874e055" # example: subnet-abcdef1
+  default = "subnet-03e972fa6d874e055"
 }
 
 variable "subnet02" {
-  default = "subnet-0f4b81d5b1fda41d6" # example: subnet-abcdef1
+  default = "subnet-0f4b81d5b1fda41d6"
 }
 
 variable "subnet03" {
-  default = "subnet-04e2287e1f14f9416" # example: subnet-abcdef1
+  default = "subnet-04e2287e1f14f9416"
 }
 
 variable "vpcId" {
-  #default = "vpc-0ab35d5fa67a46c53" # example: vpc-abcdef1
-  default = "vpc-0a8292bdf36eeb88e" # example: vpc-abcdef1
+  default = "vpc-0a8292bdf36eeb88e"
 }
 
 variable "vpcCIDR" {
-  default = "172.31.0.0/16" # example: 10.10.0.0/16
+  default = "172.31.0.0/16"
 }
 
 variable "AWSAccount" {
-  default = "339712887556" # example: 123456789
+  default = "339712887556"
 }
 
 variable "tags" {

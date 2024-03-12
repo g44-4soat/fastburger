@@ -27,12 +27,10 @@ public class PasswordGenerator {
         String shuffledPassword = shuffleString(password.toString());
         return shuffledPassword;
     }
-
     private static char randomCharacter(String input) {
         int randomIndex = random.nextInt(input.length());
         return input.charAt(randomIndex);
     }
-
     private static String shuffleString(String input) {
         char[] characters = input.toCharArray();
         for (int i = 0; i < characters.length; i++) {

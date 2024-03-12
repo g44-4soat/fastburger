@@ -29,10 +29,12 @@ public class ClientService {
                 .region(Region.US_EAST_1)
                 .build();
         Result result = getResult(client);
+        String pass = PasswordGenerator.generatePassword(20);
+
         AdminCreateUserRequest request = AdminCreateUserRequest.builder()
                 .userPoolId(awsUserPollCognito)
-                .username(client.getNome())
-                .temporaryPassword(PasswordGenerator.generatePassword(7))
+                .username(client.getNome().split(" ")[0])
+                .temporaryPassword(pass)
                 .userAttributes(result.emailAttribute(), result.cpfAttribute(), result.usernamePreferredAttribute())
                 .build();
         AdminCreateUserResponse response = cognitoClient.adminCreateUser(request);
@@ -41,7 +43,7 @@ public class ClientService {
     private static Result getResult(Client client) {
         AttributeType usernamePreferredAttribute = AttributeType.builder()
                 .name("preferred_username")
-                .value(client.getNome())
+                .value(client.getNome().split(" ")[0])
                 .build();
 
         AttributeType emailAttribute = AttributeType.builder()

@@ -24,10 +24,12 @@ variable "rdsDbName" {
 
 variable "rdsUser" {
   description = "Inserir usuario do banco em secrets"
+  default = ${{ secrets.RDSUSER }}
 }
 
 variable "rdsPass" {
   description = "Inserir senha do banco em secrets"
+  default = ${{ secrets.RDSPASS }}
 }
 
 variable "instanceClass" {
@@ -52,6 +54,7 @@ variable "spring_port" {
 
 variable "mercado_token" {
   description = "Inserir token do mercado pago"
+  default = ${{ secrets.MERCADO_TOKEN }}
 }
 
 variable "token_fallback" {
@@ -89,7 +92,9 @@ variable "AWSAccount" {
 variable "tags" {
   type = map(string)
   default = {
+    Project   = "Fiap Tech Challenge 4SOAT - g44"
     App      = "fastburger",
     Ambiente = "Desenvolvimento"
+    ManagedBy = "terraform"
   }
 }

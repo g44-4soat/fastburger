@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fastburger-api-configmap
+  namespace: fastburger-api
+data:
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/challenge
+  SPRING_DATASOURCE_USERNAME: arch
+  SPRING_PORT: "8080"
+  POSTGRES_DB: challenge
+  POSTGRES_USER: arch
+  MERCADO_API: https://api.mercadopago.com

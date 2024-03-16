@@ -12,17 +12,21 @@ import org.springframework.stereotype.Component;
 public class SaveClientAdapter implements SaveClientOutPutPort {
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
+    private final ClientService clientService;
 
     @Autowired
-    public SaveClientAdapter(ClientRepository clientRepository, ClientMapper clientMapper) {
+    public SaveClientAdapter(ClientRepository clientRepository, ClientMapper clientMapper, ClientService clientService) {
         this.clientRepository = clientRepository;
         this.clientMapper = clientMapper;
+        this.clientService = clientService;
     }
-
     @Override
     public Client save(Client client) {
         var clientEntity = this.clientMapper.toEntity(client);
         var savedClient = this.clientRepository.save(clientEntity);
+
+        if (client.getNome() != null && client.getEmail() != null && client.getCpf() != null)
+            this.clientService.saveClientOnCognito(client);
         return this.clientMapper.toDomain(savedClient);
     }
 }

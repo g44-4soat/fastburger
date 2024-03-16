@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  namespace: fastburger-api
+  name: netchallenge
+spec:
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              fastburger.network/netchallenge: "true"
+  podSelector:
+    matchLabels:
+      fastburger.network/netchallenge: "true"

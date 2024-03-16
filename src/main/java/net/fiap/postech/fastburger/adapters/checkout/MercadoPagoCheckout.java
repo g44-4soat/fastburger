@@ -52,9 +52,6 @@ public class MercadoPagoCheckout implements CheckoutContract {
 
     @Override
     public void processFallbackPayment(PaymentDataProcess paymentDataProcess, String token) {
-        if (!this.authenticationService.verifyToken(token)){
-            throw new BusinessException("Invalid Token");
-        }
         Order order = this.listOrderByNumberGateway.listByNumber(paymentDataProcess.getOrderId());
         order.setWasPaid(paymentDataProcess.isPaymentWasApproved());
         Order update = this.updateOrderGetway.update(paymentDataProcess.getOrderId(), order);

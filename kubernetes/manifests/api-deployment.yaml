@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: fastburger-api
+  labels:
+    fastburger.service: api
+  name: api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      fastburger.service: api
+  template:
+    metadata:
+      namespace: fastburger-api
+      labels:
+        fastburger.network/netchallenge: "true"
+        fastburger.service: api
+    spec:
+      containers:
+        - image: 4soatg44/challenge-fastburger:1.2.1
+          name: api
+          envFrom:
+            - configMapRef:
+                name: fastburger-api-configmap
+            - secretRef:
+                name: fastburger-api-secrets
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              cpu: 512m
+              memory: 512Mi
+            requests:
+              cpu: 256m
+              memory: 384Mi

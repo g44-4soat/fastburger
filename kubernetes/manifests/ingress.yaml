@@ -1,0 +1,18 @@
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: fastburger-api-ingress
+    namespace: fastburger-api
+  spec:
+    ingressClassName: nginx
+    rules:
+      - host: fastburger-api-192-168-49-2.nip.io
+        http:
+          paths:
+            - pathType: Prefix
+              backend:
+                service:
+                  name: api
+                  port:
+                    number: 8080
+              path: /

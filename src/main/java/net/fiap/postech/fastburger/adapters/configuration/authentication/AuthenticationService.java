@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationService {
 
-    @Value("${token.api.PaymentDataProcess}")
+    @Value("${TOKEN_FALLBACK}")
     private String token;
 
     public Boolean verifyToken(String token){

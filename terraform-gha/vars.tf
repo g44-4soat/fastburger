@@ -22,15 +22,15 @@ variable "rdsDbName" {
   default = "challenge"
 }
 
-variable "rdsUser" {
-  description = "it cames from gh secrets"
-  default = ${{ secrets.RDSUSER }}
-}
+#variable "rdsUser" {
+#  description = "it cames from gh secrets"
+#  default     = var.rdsuser
+#}
 
-variable "rdsPass" {
-  description = "it cames from gh secrets"
-  default = ${{ secrets.RDSPASS }}
-}
+#variable "rdsPass" {
+#  description = "it cames from gh secrets"
+#  default     = var.rdspass
+#}
 
 variable "instanceClass" {
   default = "db.t3.micro"
@@ -52,12 +52,13 @@ variable "spring_port" {
   default = "8080"
 }
 
-variable "mercado_token" {
-  description = "it cames from gh secrets"
-  default = ${{ secrets.MERCADO_TOKEN }}
-}
+#variable "mercado_token" {
+#  description = "it cames from gh secrets"
+#  default     = var.mercado_pago
+#}
 
 variable "token_fallback" {
+  #default = "ODk4NDk1ODM4NTM4MjU0OS0wMTA3MjAtOGI0NWU2ODBjZDA4NWY5OTc2ODYzYTk1NjU1ZGFmZjctMTQzNzE2NDc9"
   default = "ODk4NDk1ODM4NTM4MjU0OS0wMTA3MjAtOGI0NWU2ODBjZDA4NWY5OTc2ODYzYTk1NjU1ZGFmZjctMTQzNzE2NDc3"
 }
 

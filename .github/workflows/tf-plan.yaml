@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TF_WORKING_DIR: 'terraform-gha'
+      TF_VAR_rdsuser: ${{ secrets.RDSUSER }}
+      TF_VAR_rdspass: ${{ secrets.RDSPASS }}
+      TF_VAR_mercado_pago: ${{ secrets.MERCADO_TOKEN }}
 
     defaults:
       run:

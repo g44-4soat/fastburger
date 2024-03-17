@@ -23,12 +23,12 @@ variable "rdsDbName" {
 }
 
 variable "rdsUser" {
-  description = "from gh secrets"
+  description = "it cames from gh secrets"
   default = ${{ secrets.RDSUSER }}
 }
 
 variable "rdsPass" {
-  description = "from gh secrets"
+  description = "it cames from gh secrets"
   default = ${{ secrets.RDSPASS }}
 }
 
@@ -53,7 +53,7 @@ variable "spring_port" {
 }
 
 variable "mercado_token" {
-  description = "from gh secrets"
+  description = "it cames from gh secrets"
   default = ${{ secrets.MERCADO_TOKEN }}
 }
 

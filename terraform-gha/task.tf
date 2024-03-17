@@ -8,7 +8,7 @@ resource "aws_ecs_task_definition" "task" {
       command   = ["java", "-jar", "/app/target/fastburger-0.2.1-SNAPSHOT.jar", "--spring.config.name=docker"]
       environment = [
         {
-          name = "SPRING_DATASOURCE_URL"
+          name  = "SPRING_DATASOURCE_URL"
           value = "jdbc:postgresql://${aws_db_instance.rds.endpoint}/${aws_db_instance.rds.db_name}"
         },
         {

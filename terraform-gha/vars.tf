@@ -24,12 +24,12 @@ variable "rdsDbName" {
 
 variable "rdsUser" {
   description = "it cames from gh secrets"
-  default = var.rdsuser
+  default     = var.rdsuser
 }
 
 variable "rdsPass" {
   description = "it cames from gh secrets"
-  default = var.rdspass
+  default     = var.rdspass
 }
 
 variable "instanceClass" {
@@ -54,7 +54,7 @@ variable "spring_port" {
 
 variable "mercado_token" {
   description = "it cames from gh secrets"
-  default = var.mercado_pago
+  default     = var.mercado_pago
 }
 
 variable "token_fallback" {

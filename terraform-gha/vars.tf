@@ -92,9 +92,9 @@ variable "AWSAccount" {
 variable "tags" {
   type = map(string)
   default = {
-    Project   = "Fiap Tech Challenge 4SOAT - g44"
-    App      = "fastburger",
-    Ambiente = "Desenvolvimento"
-    ManagedBy = "terraform"
+    Project     = "Fiap Tech Challenge 4SOAT - g44"
+    App         = "fastburger",
+    Environment = "Desenvolvimento"
+    ManagedBy   = "terraform"
   }
 }

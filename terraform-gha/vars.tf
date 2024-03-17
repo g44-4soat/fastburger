@@ -23,12 +23,12 @@ variable "rdsDbName" {
 }
 
 variable "rdsUser" {
-  description = "Inserir usuario do banco em secrets"
+  description = "from gh secrets"
   default = ${{ secrets.RDSUSER }}
 }
 
 variable "rdsPass" {
-  description = "Inserir senha do banco em secrets"
+  description = "from gh secrets"
   default = ${{ secrets.RDSPASS }}
 }
 
@@ -53,7 +53,7 @@ variable "spring_port" {
 }
 
 variable "mercado_token" {
-  description = "Inserir token do mercado pago"
+  description = "from gh secrets"
   default = ${{ secrets.MERCADO_TOKEN }}
 }
 

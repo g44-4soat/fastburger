@@ -24,12 +24,12 @@ variable "rdsDbName" {
 
 variable "rdsUser" {
   description = "Inserir usuario do banco em secrets"
-  default = ${{ secrets.RDSUSER }}
+  default = var.rdsuser
 }
 
 variable "rdsPass" {
   description = "Inserir senha do banco em secrets"
-  default = ${{ secrets.RDSPASS }}
+  default = var.rdspass
 }
 
 variable "instanceClass" {
@@ -54,7 +54,7 @@ variable "spring_port" {
 
 variable "mercado_token" {
   description = "Inserir token do mercado pago"
-  default = ${{ secrets.MERCADO_TOKEN }}
+  default = var.mercado_pago
 }
 
 variable "token_fallback" {
